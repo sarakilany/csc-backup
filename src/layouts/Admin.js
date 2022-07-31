@@ -26,6 +26,7 @@ import FixedPlugin from "../componets/FixedPlugin/FixedPlugin";
 import routes from "../routes.js";
 
 import sidebarImage from "../assets/images/sidebar-3.jpg";
+import Header from "../common/header/Header";
 
 function Admin() {
   const [image, setImage] = React.useState(sidebarImage);
@@ -35,7 +36,7 @@ function Admin() {
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/admin/dashboard") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -66,7 +67,7 @@ function Admin() {
       <div className="wrapper">
         <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
         <div className="main-panel" ref={mainPanel}>
-          <AdminNavbar />
+          <Header />
           <div className="content">
             <Routes>{getRoutes(routes)}</Routes>
           </div>
