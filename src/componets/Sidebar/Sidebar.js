@@ -32,7 +32,7 @@ function Sidebar({ color, image, routes }) {
       <div
         className="sidebar-background"
         style={{
-          backgroundImage: "url(" + image + ")"
+          backgroundImage: "url(" + image + ")",
         }}
       />
       <div className="sidebar-wrapper">
@@ -42,7 +42,10 @@ function Sidebar({ color, image, routes }) {
             className="simple-text logo-mini mx-1"
           >
             <div className="logo-img">
-              <img src={require("../../assets/images/reactlogo.png")} alt="..." />
+              <img
+                src={require("../../assets/images/reactlogo.png")}
+                alt="..."
+              />
             </div>
           </a>
           <a className="simple-text" href="http://www.creative-tim.com">
@@ -51,26 +54,26 @@ function Sidebar({ color, image, routes }) {
         </div>
         <Nav>
           {routes.map((prop, key) => {
-            if (!prop.redirect)
-              return (
-                <li
-                  className={
-                    prop.upgrade
-                      ? "active active-pro"
-                      : activeRoute(prop.layout + prop.path)
-                  }
-                  key={key}
+            if (!prop.redirect) console.log(prop);
+            return (
+              <li
+                className={
+                  prop.upgrade
+                    ? "active active-pro"
+                    : activeRoute(prop.layout + prop.path)
+                }
+                key={key}
+              >
+                <NavLink
+                  to={prop.layout + prop.path}
+                  className="nav-link"
+                  activeclassname="active"
                 >
-                  <NavLink
-                    to={prop.layout + prop.path}
-                    className="nav-link"
-                    activeClassName="active"
-                  >
-                    <i className={prop.icon} />
-                    <p>{prop.name}</p>
-                  </NavLink>
-                </li>
-              );
+                  <i className={prop.icon} />
+                  <p>{prop.name}</p>
+                </NavLink>
+              </li>
+            );
             return null;
           })}
         </Nav>

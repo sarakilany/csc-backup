@@ -36,7 +36,8 @@ function Admin() {
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin/dashboard") {
+      if (prop.layout === "/admin") {
+        console.log(prop, "admiiiin");
         return (
           <Route
             path={prop.layout + prop.path}
