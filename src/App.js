@@ -9,7 +9,7 @@ import Dashboard from "./views/Dashboard";
 import Icons from "./views/Icons";
 import Notifications from "./views/Notifications";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import AllNews from "./componets/latestNews/LatestNews";
+import AllNews from "./componets/allNews/AllNews";
 import dashboardRoutes from "./routes";
 import AdminLayout from "./layouts/Admin";
 function App() {
@@ -23,12 +23,8 @@ function App() {
         <Route path="profile" element={<User />} />
         <Route path="allNews" element={<AllNews />} />
 
-        <Route
-          path="/admin/dashboard"
-          element={<AdminLayout authed={true} />}
-        />
-
-        {/* <Navigate from="/" to="/admin/dashboard" /> */}
+        <Route path="/admin" element={<AdminLayout authed={true} />} />
+        {/* <Navigate from="/" to="/admin" /> */}
       </Routes>
     </>
   );
