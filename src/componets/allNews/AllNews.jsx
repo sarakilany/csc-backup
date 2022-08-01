@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-// import { Link } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
 import "./AllNews.css";
 
+const Per_Page = 12;
 export default function AllNews() {
   const [news, setNews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -25,8 +28,17 @@ export default function AllNews() {
       setIsLoading(true);
     }
   };
+  console.log("news", news);
 
-  console.log("news api ", news);
+  const handlePageClick = ({ selected: selectedPage }) => {
+    console.log("selected page ", selectedPage);
+    setCurrentPage(selectedPage);
+  };
+
+  const offset = currentPage * Per_Page;
+
+  const currentPageData = news.slice(offset, offset + Per_Page);
+  const totalPages = Math.ceil(news.length) / Per_Page;
 
   return (
     <>
@@ -34,12 +46,11 @@ export default function AllNews() {
         <i className="my-5 fa-solid fa-spinner fa-spin"></i>
       ) : (
         <div className="container">
-          <h3 className="text-center my-5">Latest News ...</h3>
-
           <div className="row">
-            {news.map((article, index) => (
-              <div className="col-md-3 my-2">
-                <Card key={index}>
+            <h2 className="text-center my-5">All News..</h2>
+            {currentPageData.map((article, index) => (
+              <div key={index} className="col-md-3 my-2">
+                <Card>
                   <figure style={{ height: "200px" }}>
                     <Card.Img
                       variant="top"
@@ -49,27 +60,43 @@ export default function AllNews() {
                   </figure>
                   <Card.Body>
                     <Card.Title>
-                      {" "}
-                      {article.title.substring(0, 35) + " ..."}
+                      <h4>{article.title.substring(0, 35) + " ..."}</h4>
                     </Card.Title>
                     <Card.Text>
                       {article.content.substring(0, 150) + "..."}
                     </Card.Text>
 
-                    <Button
-                      style={{
-                        boxShadow: "none",
-                        backgroundColor: "#08A045",
-                        border: "#628B48",
-                      }}
-                      variant="primary"
+                    <Link
+                      className="text-decoration-none"
+                      to={`/allNews/${article.title}`}
                     >
-                      Show Details ..
-                    </Button>
+                      <Button
+                        style={{
+                          boxShadow: "none",
+                          backgroundColor: "#08A045",
+                          border: "#628B48",
+                        }}
+                        variant="primary"
+                      >
+                        Show Details ..
+                      </Button>
+                    </Link>
                   </Card.Body>
                 </Card>
               </div>
             ))}
+
+            <ReactPaginate
+              previousLabel={"<<"}
+              nextLabel={">> "}
+              pageCount={totalPages}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              previousLinkClassName={"pagination_link"}
+              nextLinkClassName={"pagination_link"}
+              disabledClassName={"pagination_link_disabled"}
+              activeClassName={"pagination_link_active"}
+            />
           </div>
         </div>
       )}
