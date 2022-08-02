@@ -25,9 +25,9 @@ export default function LatestNews() {
     <>
       <div className="container py-2 mb-5">
       <h2 className="text-center my-5 dark-text">Latest News</h2>
-        <div className="row">
+        <div className="row align-items-stretch">
           {someNews.map((article, index) => (
-            <div key={index} className="col-md-3 my-2">
+            <div key={index} className="col-md-6 col-xl-3 my-2 d-flex align-items-stretch">
             <Card>
               <figure style={{ height: "200px" }}>
                 <Card.Img
