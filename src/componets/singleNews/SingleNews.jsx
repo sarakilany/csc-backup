@@ -1,29 +1,43 @@
-import React from 'react';
-import newsImg from '../../assets/images/img2.jpg';
+import React from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import myImg from "../../assets/images/18.jpg";
 
 export default function SingleNews() {
-  
-  return (<>
-  
-    <h3 className='text-center my-4'>Single News ..</h3>
-    <div className="container">
-      <div className="row">
-        <div className="col-md-10 m-auto mb-4">
-          <img className='w-100' src={newsImg} alt="news image" />
-        </div>
-        <div className="col-md-10 m-auto my-3">
-          <h4>Recycle Your Past And Present Than Make A Perfect Future.</h4>
-        </div>
-        <div className="col-md-10 mb-4 m-auto">
-          <p style={{color:"#818181"}}>If you are creative, then you never refuse reuse.I love woody trash because I use it.
-             Recycling is a saving of money. Don’t say sorry for recycling.
-              Never kick recycling in life.Reuse, recycle is not bullshit.
-              Recycling the environment is our biggest dream.Stop chasing waste your material.
-              Far away to be trashy.Reuse aluminum because of its superb.Save energy for recycling. Society needs recycling.</p>
+  const urlParams = useParams();
+  const [allNews, setAllNews] = useState([]);
+  const [singleNews, setSingleNews] = useState({});
+
+  // const getAllNews = async () => {
+  //   let { data } = await axios.get(
+  //     `https://newsapi.org/v2/everything?q=Apple&from=2022-07-27&sortBy=popularity&apiKey=bb346e7a6bd04cf78c6d6c51d46cc5be}`
+  //   );
+  //   console.log("data ", data);
+  //   setSingleNews(data.articles);
+  // };
+
+  // const getSingleNews = () => {
+  //   const single_news = allNews.find((item) => item.title == urlParams.title);
+  //   setSingleNews(single_news);
+  // };
+  // console.log("singleNews ", singleNews);
+
+  return (
+    <>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-10 m-auto mb-4">
+            <img className="w-100" src={myImg} alt="news image" />
+          </div>
+          <div className="col-md-10 m-auto my-3">
+            <h4>title</h4>
+          </div>
+          <div className="col-md-10 mb-4 m-auto">
+            <p style={{ color: "#818181" }}>ddesc</p>
+          </div>
         </div>
       </div>
-    </div>
-
     </>
-  )
+  );
 }
