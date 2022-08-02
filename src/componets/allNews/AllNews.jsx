@@ -28,7 +28,6 @@ export default function AllNews() {
       setIsLoading(true);
     }
   };
-  console.log("news", news);
 
   const handlePageClick = ({ selected: selectedPage }) => {
     console.log("selected page ", selectedPage);
@@ -69,6 +68,8 @@ export default function AllNews() {
                     <Link
                       className="text-decoration-none"
                       to={`/allNews/${article.title}`}
+                      state={{ singleNews: article }}
+                      
                     >
                       <Button
                         style={{
