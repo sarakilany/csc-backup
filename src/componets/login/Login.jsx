@@ -5,16 +5,14 @@ import Form from 'react-bootstrap/Form';
 import {useForm} from 'react-hook-form';
 import '../login/Login.css';
 
-
 export default function Login() {
     const {register , handleSubmit ,formState:{errors} } = useForm({mode: "onBlur"});
 
     const onSubmit = (data)=>{
         console.log("data ",data)
     }
-
-    console.log(errors)
-    return ( <>
+    return ( 
+    <>
       <h3 className='text-center my-5'>Login Form ...</h3>
       <Form onSubmit={handleSubmit(onSubmit)} className='container mt-5 w-50 p-5 border' >
         <Form.Group className="mb-3" controlId="formBasicEmail">
