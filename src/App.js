@@ -23,6 +23,7 @@ function App() {
         <Route path="privacy" element={<Privacy />} />
         <Route path="profile" element={<User />} />
         <Route path="allNews/:title" element={<SingleNews />} />
+        <Route path="allNews" element={<AllNews />} />
 
 
         <Route path="/admin/*" element={<Admin authed={true} />} />

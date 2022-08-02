@@ -10,8 +10,8 @@ import "./Header.css";
 export default function Header() {
   return (
     <>
-      {["md"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="green-bg fixed-top">
+      {["lg"].map((expand) => (
+        <Navbar key={expand} expand={expand} className="green-bg sticky-top">
           <Container>
             <Navbar.Brand className="white-text fw-semibold" as={Link} to="/">
               LOGO
@@ -19,7 +19,7 @@ export default function Header() {
 
             <Navbar.Toggle
               aria-controls={`offcanvasNavbar-expand-${expand}`}
-              className="white-bg"
+              className="white-bg mx-3"
             />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -60,6 +60,13 @@ export default function Header() {
                     </Nav.Link>
                     <Nav.Link className="white-text fw-semibold">
                       Stats
+                    </Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to="/allNews"
+                      className="white-text fw-semibold"
+                    >
+                      News
                     </Nav.Link>
                   </div>
                   <div className=" d-flex flex-column flex-md-row justify-content-center align-items-md-center">

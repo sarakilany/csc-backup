@@ -5,7 +5,6 @@ export default function SingleNews() {
 
   const location = useLocation()
   const { singleNews } = location.state
-  console.log(singleNews);
 
   return (
     <>
