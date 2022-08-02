@@ -54,7 +54,6 @@ function Sidebar({ color, image, routes }) {
         </div>
         <Nav>
           {routes.map((prop, key) => {
-            if (!prop.redirect) console.log(prop);
             return (
               <li
                 className={
@@ -74,7 +73,6 @@ function Sidebar({ color, image, routes }) {
                 </NavLink>
               </li>
             );
-            return null;
           })}
         </Nav>
       </div>

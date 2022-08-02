@@ -15,62 +15,63 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { Component } from "react";
-import { useLocation, Route, Routes } from "react-router-dom";
+import React, { Component } from 'react'
+import {
+  useLocation,
+  Route,
+  Routes,
+} from 'react-router-dom'
 
-import AdminNavbar from "../../src/componets/Navbars/AdminNavbar";
-import Footer from "../componets/Footer/Footer";
-import Sidebar from "../componets/Sidebar/Sidebar";
-import FixedPlugin from "../componets/FixedPlugin/FixedPlugin";
+import Footer from '../componets/Footer/Footer'
+import Sidebar from '../componets/Sidebar/Sidebar'
+import FixedPlugin from '../componets/FixedPlugin/FixedPlugin'
 
-import routes from "../routes.js";
+import routes from '../routes.js'
 
-import sidebarImage from "../assets/images/sidebar-3.jpg";
-import Header from "../common/header/Header";
+import sidebarImage from '../assets/images/sidebar-3.jpg'
+import Header from '../common/header/Header'
 
-function Admin() {
-  const [image, setImage] = React.useState(sidebarImage);
-  const [color, setColor] = React.useState("black");
-  const [hasImage, setHasImage] = React.useState(true);
-  const location = useLocation();
-  const mainPanel = React.useRef(null);
-  const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
-        console.log(prop, "admiiiin");
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            render={(props) => <prop.component {...props} />}
-            key={key}
-          />
-        );
-      } else {
-        return null;
-      }
-    });
-  };
+function Admin () {
+  const [image, setImage] = React.useState(sidebarImage)
+  const [color, setColor] = React.useState('black')
+  const [hasImage, setHasImage] = React.useState(true)
+  const location = useLocation()
+  const mainPanel = React.useRef(null)
+
   React.useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    mainPanel.current.scrollTop = 0;
+    document.documentElement.scrollTop = 0
+    document.scrollingElement.scrollTop = 0
+    mainPanel.current.scrollTop = 0
     if (
       window.innerWidth < 993 &&
-      document.documentElement.className.indexOf("nav-open") !== -1
+      document.documentElement.className.indexOf('nav-open') !== -1
     ) {
-      document.documentElement.classList.toggle("nav-open");
-      var element = document.getElementById("bodyClick");
-      element.parentNode.removeChild(element);
+      document.documentElement.classList.toggle('nav-open')
+      var element = document.getElementById('bodyClick')
+      element.parentNode.removeChild(element)
     }
-  }, [location]);
+  }, [location])
   return (
     <>
-      <div className="wrapper">
-        <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
-        <div className="main-panel" ref={mainPanel}>
+      <div className='wrapper'>
+        <Sidebar color={color} image={hasImage ? image : ''} routes={routes} />
+        <div className='main-panel' ref={mainPanel}>
           <Header />
-          <div className="content">
-            <Routes>{getRoutes(routes)}</Routes>
+          <div className='content'>
+            <Routes>
+              {routes.map((prop, key) => {
+                if (prop.layout === '/admin') {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  )
+                }
+              })}
+            </Routes>
           </div>
           <Footer />
         </div>
@@ -79,12 +80,12 @@ function Admin() {
         hasImage={hasImage}
         setHasImage={() => setHasImage(!hasImage)}
         color={color}
-        setColor={(color) => setColor(color)}
+        setColor={color => setColor(color)}
         image={image}
-        setImage={(image) => setImage(image)}
+        setImage={image => setImage(image)}
       />
     </>
-  );
+  )
 }
 
-export default Admin;
+export default Admin

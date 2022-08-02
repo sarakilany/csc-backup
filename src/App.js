@@ -12,7 +12,7 @@ import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import AllNews from "./componets/allNews/AllNews";
 import SingleNews from "./componets/singleNews/SingleNews";
 import dashboardRoutes from "./routes";
-import AdminLayout from "./layouts/Admin";
+import Admin from "./layouts/Admin";
 function App() {
   return (
     <>
@@ -22,9 +22,13 @@ function App() {
         <Route path="contactUs" element={<ContactUs />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="profile" element={<User />} />
-        <Route path="allNews" element={<AllNews />} />
         <Route path="allNews/:title" element={<SingleNews />} />
-        <Route path="/admin" element={<AdminLayout authed={true} />} />
+
+
+        <Route path="/admin/*" element={<Admin authed={true} />} />
+
+        
+        
         {/* <Navigate from="/" to="/admin" /> */}
       </Routes>
     </>
