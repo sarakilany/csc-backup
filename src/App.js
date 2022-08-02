@@ -8,6 +8,7 @@ import User from "./views/UserProfile";
 import { Routes, Route } from "react-router-dom";
 import SingleNews from "./componets/singleNews/SingleNews";
 import Admin from "./layouts/Admin";
+import AllNews from './componets/allNews/AllNews'
 function App() {
   return (
     <>
@@ -18,6 +19,8 @@ function App() {
         <Route path="privacy" element={<Privacy />} />
         <Route path="profile" element={<User />} />
         <Route path="allNews/:title" element={<SingleNews />} />
+        <Route path="allNews" element={<AllNews />} />
+
         <Route path="/admin/*" element={<Admin authed={true} />} />
       </Routes>
     </>

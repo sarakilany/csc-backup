@@ -1,4 +1,6 @@
-
+.spinner-container{
+    height: 100vh !important;
+}
 i{
     font-size: 35px;
     text-align: center;
