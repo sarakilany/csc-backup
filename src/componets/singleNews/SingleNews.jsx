@@ -1,5 +1,4 @@
 import React from "react";
-import myImg from "../../assets/images/18.jpg";
 import { useLocation } from "react-router-dom";
 
 export default function SingleNews() {

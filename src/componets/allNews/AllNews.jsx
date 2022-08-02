@@ -44,14 +44,14 @@ export default function AllNews() {
     <Header />
       {isLoading ? (
         <div className="spinner-container d-flex justify-content-center align-items-center">
-          <i className="my-5 fa-solid fa-spinner fa-spin"></i>
+          <i className="fa-solid fa-spinner fa-spin"></i>
         </div>
       ) : (
         <div className="container mt-5 mb-3">
-          <div className="row">
             <h2 className="text-center my-5 dark-text">All News</h2>
+          <div className="row align-items-stretch">
             {currentPageData.map((article, index) => (
-                      <div key={index} className="col-md-3 my-2">
+                      <div key={index} className="col-md-6 col-lg-4 col-xl-3 my-2 d-flex align-items-stretch">
                       <Card>
                         <figure style={{ height: "200px" }}>
                           <Card.Img
