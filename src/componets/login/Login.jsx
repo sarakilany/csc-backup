@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -8,14 +7,6 @@ import { useDispatch } from "react-redux";
 import { handleHasLoged } from "../../redux/action";
 import Toast from "react-bootstrap/Toast";
 import "../login/Login.css";
-=======
-import React from 'react'
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import {useForm} from 'react-hook-form';
-import '../login/Login.css';
->>>>>>> develope
 
 export default function Login() {
   const users = [
@@ -50,9 +41,7 @@ export default function Login() {
       }
     });
   };
-  console.log(errors);
 
-<<<<<<< HEAD
   return (
     <>
       {failedlogIn && (
@@ -69,21 +58,11 @@ export default function Login() {
           <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
         </Toast>
       )}
-
       <h3 className="text-center my-5">Login Form ...</h3>
       <Form
         onSubmit={handleSubmit(onSubmit)}
         className="container mt-5 w-50 p-5 border"
       >
-=======
-    const onSubmit = (data)=>{
-        console.log("data ",data)
-    }
-    return ( 
-    <>
-      <h3 className='text-center my-5'>Login Form ...</h3>
-      <Form onSubmit={handleSubmit(onSubmit)} className='container mt-5 w-50 p-5 border' >
->>>>>>> develope
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email :</Form.Label>
           <Form.Control
