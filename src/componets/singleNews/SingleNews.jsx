@@ -1,5 +1,11 @@
 import React from "react";
+<<<<<<< HEAD
+import { useParams } from "react-router-dom";
+import { useState } from "react";
+import myImg from "../../assets/images/18.jpg";
+=======
 import { useLocation } from 'react-router-dom'
+>>>>>>> develope
 
 export default function SingleNews() {
 

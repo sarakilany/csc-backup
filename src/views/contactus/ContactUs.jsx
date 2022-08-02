@@ -1,16 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col, Row } from "react-bootstrap";
-import { appendErrors, useForm, Controller, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Header from "../../common/header/Header";
-// import "bootstrap/dist/css/bootstrap.min.css";
 const ContactUs = () => {
   const {
-    control,
     register,
-    watch,
     handleSubmit,
-    formState: { errors, touchedFields, dirtyFields },
+    formState: { errors },
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
