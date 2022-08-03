@@ -69,7 +69,6 @@ export default function AllNews() {
                       className="text-decoration-none"
                       to={`/allNews/${article.title}`}
                       state={{ singleNews: article }}
-                      
                     >
                       <Button
                         style={{
@@ -92,11 +91,11 @@ export default function AllNews() {
               nextLabel={">> "}
               pageCount={totalPages}
               onPageChange={handlePageClick}
-              containerClassName={"pagination"}
-              previousLinkClassName={"pagination_link"}
-              nextLinkClassName={"pagination_link"}
-              disabledClassName={"pagination_link_disabled"}
-              activeClassName={"pagination_link_active"}
+              containerClassName={"all_pagination"}
+              previousLinkClassName={"pagination_links"}
+              nextLinkClassName={"pagination_links"}
+              disabledClassName={"pagination_links_disabled"}
+              activeClassName={"pagination_links_active"}
             />
           </div>
         </div>
