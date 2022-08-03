@@ -11,6 +11,10 @@
 .green-bg{
     background-color: #0b6e4f !important;
 }
+.navbar .container{
+    left:0 !important;
+    top:0 !important;
+}
 /* ---user drop down--- */
 .user-info{
     background-image: url('../../assets/images/profile/person.jpg');
@@ -57,6 +61,7 @@
     background-color: #F3F9E3 !important;
     color: #0b6e4f !important;
 }
+
 
 /* ---navlinks--- */
 .offcanvas{

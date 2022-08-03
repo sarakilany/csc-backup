@@ -1,25 +1,27 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import Header from "../../common/header/Header";
 
 export default function SingleNews() {
   const location = useLocation();
   const { singleNews } = location.state;
-  console.log(singleNews);
 
   return (
     <>
-      <div className="container">
-        <div className="row my-5">
-          <div className="col-md-8 m-auto mb-4 border border-success p-2">
+    <Header />
+      <div className="container row my-4 mx-auto px-md-5">
+        <div className=" col-10 col-md-8 mx-auto">
+          <div className="">
             <img
               className="w-100"
               src={singleNews.urlToImage}
               alt="singleNews image"
             />
+
           </div>
-          <div className="col-md-6 offset-md-2">
+          <div className="p-4">
             <h3
-              className="mb-4"
+              className="my-3"
               style={{
                 color: "#097969",
               }}

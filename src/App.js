@@ -5,18 +5,13 @@ import Privacy from "./views/privacy/Privacy";
 import About from "./views/about/About";
 import ContactUs from "./views/contactus/ContactUs";
 import User from "./views/UserProfile";
-import Dashboard from "./views/Dashboard";
-import Icons from "./views/Icons";
-import Notifications from "./views/Notifications";
-import { Routes, Route, Navigate, Outlet } from "react-router-dom";
-import AllNews from "./componets/allNews/AllNews";
+import { Routes, Route } from "react-router-dom";
 import SingleNews from "./componets/singleNews/SingleNews";
-import dashboardRoutes from "./routes";
 import Admin from "./layouts/Admin";
 import TableDetails from "./views/TableDetails/TableDetails";
 import IndividualDetails from './views/individualDetails/IndividualDetails';
 import OrgDetails from './views/orgDetails/OrgDetails'
-
+import AllNews from './componets/allNews/AllNews'
 function App() {
   return (
     <>
@@ -32,11 +27,8 @@ function App() {
         <Route path="individualDetails" element={< IndividualDetails/>} />
         <Route path="orgDetails" element={< OrgDetails/>} />
         
-        <Route path="/admin/*" element={<Admin authed={true} />} />
 
-        
-        
-        {/* <Navigate from="/" to="/admin" /> */}
+        <Route path="/admin/*" element={<Admin authed={true} />} />
       </Routes>
     </>
   );

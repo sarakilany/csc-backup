@@ -1,17 +1,28 @@
-import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/esm/Button";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import { useDispatch } from "react-redux";
+import { handleHasLoged } from "../../redux/action";
+
 export default function Header() {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(handleHasLoged("notAuthed"));
+  }, []);
+
   return (
     <>
-      {["md"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="green-bg fixed-top">
+      {["lg"].map((expand) => (
+        <Navbar key={expand} expand={expand} className="green-bg sticky-top">
           <Container>
             <Navbar.Brand className="white-text fw-semibold" as={Link} to="/">
               LOGO
@@ -19,7 +30,7 @@ export default function Header() {
 
             <Navbar.Toggle
               aria-controls={`offcanvasNavbar-expand-${expand}`}
-              className="white-bg"
+              className="white-bg mx-3"
             />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -61,57 +72,69 @@ export default function Header() {
                     <Nav.Link className="white-text fw-semibold">
                       Stats
                     </Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to="/allNews"
+                      className="white-text fw-semibold"
+                    >
+                      News
+                    </Nav.Link>
                   </div>
                   <div className=" d-flex flex-column flex-md-row justify-content-center align-items-md-center">
-                    <Button
-                      variant="primary"
-                      className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
-                    >
-                      Log In
-                    </Button>
-                    <Button
-                      variant="primary"
-                      className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
-                    >
-                      Sign Up
-                    </Button>
-                    <div className="user-border mx-md-1 d-block my-2 my-md-0">
-                      <NavDropdown
-                        title=""
-                        className="user-info "
-                        id={`offcanvasNavbarDropdown-expand-${expand}`}
-                      >
-                        <NavDropdown.Item
-                          to="/profile"
-                          as={Link}
-                          className="white-text fw-semibold "
+                    {state.has_loged == "notAuthed" ? (
+                      <div className="d-flex">
+                        <Button
+                          variant="primary"
+                          className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
                         >
-                          UserName
-                          <small className="d-block fw-light">email</small>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item
-                          href="#action5"
-                          className="white-text fw-semibold "
+                          Log In
+                        </Button>
+                        <Button
+                          variant="primary"
+                          className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
                         >
-                          settings
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          to="/admin"
-                          as={Link}
-                          className="white-text fw-semibold "
+                          Sign Up
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="user-border mx-md-1 d-block my-2 my-md-0">
+                        <NavDropdown
+                          title=""
+                          className="user-info "
+                          id={`offcanvasNavbarDropdown-expand-${expand}`}
                         >
-                          Dashboard
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          to="/allNews"
-                          as={Link}
-                          className="white-text fw-semibold "
-                        >
-                          News
-                        </NavDropdown.Item>
-                      </NavDropdown>
-                    </div>
+                          <NavDropdown.Item
+                            to="/profile"
+                            as={Link}
+                            className="white-text fw-semibold "
+                          >
+                            UserName
+                            <small className="d-block fw-light">email</small>
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item
+                            href="#action5"
+                            className="white-text fw-semibold "
+                          >
+                            settings
+                          </NavDropdown.Item>
+                          <NavDropdown.Item
+                            to="/admin"
+                            as={Link}
+                            className="white-text fw-semibold "
+                          >
+                            Dashboard
+                          </NavDropdown.Item>
+                          <NavDropdown.Item
+                            to="/allNews"
+                            as={Link}
+                            className="white-text fw-semibold "
+                          >
+                            News
+                          </NavDropdown.Item>
+                        </NavDropdown>
+                      </div>
+                    )}
                   </div>
                 </Nav>
               </Offcanvas.Body>
