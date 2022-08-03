@@ -11,6 +11,10 @@ import Admin from "./layouts/Admin";
 import AllNews from "./componets/allNews/AllNews";
 import Login from "./componets/login/Login";
 import Register from "./componets/Register/Register";
+import TableDetails from "./views/TableDetails/TableDetails";
+import IndividualDetails from './views/individualDetails/IndividualDetails';
+import OrgDetails from './views/orgDetails/OrgDetails'
+import AllNews from './componets/allNews/AllNews'
 function App() {
   return (
     <>
@@ -20,11 +24,14 @@ function App() {
         <Route path="contactUs" element={<ContactUs />} />
         <Route path="privacy" element={<Privacy />} />
         <Route path="profile" element={<User />} />
-        <Route path="allNews/:title" element={<SingleNews />} />
         <Route path="allNews" element={<AllNews />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
-
+        <Route path="tableDetails" element={<TableDetails />} />
+        <Route path="allNews/:title" element={<SingleNews />} />
+        <Route path="individualDetails" element={< IndividualDetails/>} />
+        <Route path="orgDetails" element={< OrgDetails/>} />
+        
         <Route path="/admin/*" element={<Admin authed={true} />} />
       </Routes>
     </>
