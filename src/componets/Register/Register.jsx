@@ -3,6 +3,8 @@ import FormInput from "../FormInputs/formInput";
 import FormSelect from "../FormInputs/formSelect";
 import Checkbox from "../FormInputs/Checkbox";
 import "./Register.css";
+import Header from "../../common/header/Header";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -30,6 +32,7 @@ const Register = () => {
       label: "Username",
       pattern: "^[A-Za-z0-9]{3,16}$",
       required: true,
+      
     },
     {
       id: 2,
@@ -125,10 +128,11 @@ const Register = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  return (
-    <div className="register">
-      <form onSubmit={handleSubmit}>
-        <h1>Register</h1>
+  return (<>
+    <Header />
+    <div className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5">
+      <form onSubmit={handleSubmit} className="w-100">
+        <h2 className=" dark-text mt-0 w-100 text-center">Register</h2>
         {inputs.map((input) => (
           (input.type === 'select' ? 
           <FormSelect 
@@ -137,7 +141,7 @@ const Register = () => {
           value={values[input.name]}
           onChange={onChange} />
           :
-          <FormInput
+          <FormInput 
             key={input.id}
             {...input}
             value={values[input.name]}
@@ -145,10 +149,14 @@ const Register = () => {
            />
           )
         ))}
-        <Checkbox label="I Agree to the Privacy & Policy" />
-        <button type="submit">Submit</button>
+        <Checkbox label="I Agree to the Privacy & Policy" required/>
+        <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
+        <p style={{ color: "#818181" }} className="my-2 text-center">
+          You have an account? <Link to='/login'>LogIn</Link>
+        </p>
       </form>
     </div>
+    </>
   );
 };
 

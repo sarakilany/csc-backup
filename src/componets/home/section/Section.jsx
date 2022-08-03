@@ -2,6 +2,7 @@ import React from "react";
 import personal from "../../../assets/images/per.jpg";
 import organizational from "../../../assets/images/org.jpg";
 import { Row, Col, Container, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import './section.css'
 
 const Section = () => {
@@ -22,9 +23,8 @@ const Section = () => {
           <Button
             variant="primary"
             className="home-btn mt-5 px-4 py-3 shadow-none opacity-100"
-            style={{
-              backgroundColor: "#08A045",
-            }}
+            as={Link}
+            to='/register'
           >
             Sign Up Now
           </Button>
@@ -41,9 +41,8 @@ const Section = () => {
           <Button
             variant="primary"
             className="home-btn mt-5 px-4 py-3 shadow-none opacity-100"
-            style={{
-              backgroundColor: "#08A045",
-            }}
+            as={Link}
+            to='/register'
           >
             Sign Up Now
           </Button>
