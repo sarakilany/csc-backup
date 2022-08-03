@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleHasLoged } from "../../redux/action";
 import Toast from "react-bootstrap/Toast";
 import "../login/Login.css";
 
+import axios from "axios";
+
 export default function Login() {
-  const users = [
-    { email: "ali@yahoo.com", password: "123456pP*", role: "superAdmin" },
-    { email: "magda@yahoo.com", password: "789101112Kk/", role: "admin" },
-    {
-      email: "youssef@yahoo.com",
-      password: "1020304050mM**",
-      role: "orginazition",
-    },
-    { email: "sofya@yahoo.com", password: "5040302010nN*", role: "individual" },
-  ];
+  const [users, setUsers] = useState([]);
+  const getUsersData = async () => {
+    let { data } = await axios.get("https://server-csc.herokuapp.com/users");
+    setUsers(data);
+  };
+
   const [failedlogIn, setFailedlogIn] = useState(false);
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -29,18 +27,21 @@ export default function Login() {
     formState: { errors },
   } = useForm({ mode: "onBlur" });
 
-  const onSubmit = (data) => {
-    console.log("data ", data);
+  const onSubmit = (details) => {
+    console.log(details);
     users.filter((user) => {
-      if (data.email === user.email && data.password === user.password) {
-        dispatch(handleHasLoged(user.role));
-        navigate("/admin/*");
+      if (details.email === user.email && details.password === user.password) {
+        dispatch(handleHasLoged(user));
+        navigate("/admin/dashboard");
       } else {
         setFailedlogIn(true);
         reset(user.data);
       }
     });
   };
+  useEffect(() => {
+    getUsersData();
+  }, []);
 
   return (
     <>

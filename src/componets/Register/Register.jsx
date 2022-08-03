@@ -61,14 +61,14 @@ const Register = () => {
       required: true,
     },
     {
-        id: 5,
-        name: "confirmPassword",
-        type: "password",
-        placeholder: "Confirm Password",
-        errorMessage: "Password doesn't match!",
-        label: "Confirm Password",
-        pattern: values.password,
-        required: true,
+      id: 5,
+      name: "confirmPassword",
+      type: "password",
+      placeholder: "Confirm Password",
+      errorMessage: "Password doesn't match!",
+      label: "Confirm Password",
+      pattern: values.password,
+      required: true,
     },
     {
       id: 6,
@@ -90,12 +90,12 @@ const Register = () => {
       // pattern: "",
     },
     {
-        id: 8,
-        name: "city",
-        type: "select",
-        placeholder: "Select your city",
-        label: "City",
-        required: true, 
+      id: 8,
+      name: "city",
+      type: "select",
+      placeholder: "Select your city",
+      label: "City",
+      required: true,
     },
     {
       id: 9,
@@ -103,7 +103,7 @@ const Register = () => {
       type: "select",
       placeholder: "Select your zone",
       label: "Zone",
-      required: true, 
+      required: true,
     },
     {
       id: 10,
@@ -112,7 +112,7 @@ const Register = () => {
       placeholder: "Address",
       errorMessage: "You should enter your current address!",
       label: "Address",
-      required: true, 
+      required: true,
     },
   ];
 
@@ -129,22 +129,23 @@ const Register = () => {
     <div className="register">
       <form onSubmit={handleSubmit}>
         <h1>Register</h1>
-        {inputs.map((input) => (
-          (input.type === 'select' ? 
-          <FormSelect 
-          key={input.id}
-          {...input}
-          value={values[input.name]}
-          onChange={onChange} />
-          :
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-           />
+        {inputs.map((input) =>
+          input.type === "select" ? (
+            <FormSelect
+              key={input.id}
+              {...input}
+              value={values[input.name]}
+              onChange={onChange}
+            />
+          ) : (
+            <FormInput
+              key={input.id}
+              {...input}
+              value={values[input.name]}
+              onChange={onChange}
+            />
           )
-        ))}
+        )}
         <Checkbox label="I Agree to the Privacy & Policy" />
         <button type="submit">Submit</button>
       </form>
