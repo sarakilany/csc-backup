@@ -15,10 +15,6 @@ export default function Header() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(handleHasLoged("notAuthed"));
-  }, []);
-
   return (
     <>
       {["lg"].map((expand) => (
@@ -81,7 +77,7 @@ export default function Header() {
                     </Nav.Link>
                   </div>
                   <div className=" d-flex flex-column flex-md-row justify-content-center align-items-md-center">
-                    {state.has_loged == "notAuthed" ? (
+                    {state.has_loged === null ? (
                       <div className="d-flex">
                         <Button
                         as={Link}
@@ -130,11 +126,12 @@ export default function Header() {
                             Dashboard
                           </NavDropdown.Item>
                           <NavDropdown.Item
-                            to="/allNews"
+                            to="/"
                             as={Link}
                             className="white-text fw-semibold "
+                            onClick={() => dispatch(handleHasLoged(null))}
                           >
-                            News
+                            LogOut
                           </NavDropdown.Item>
                         </NavDropdown>
                       </div>
