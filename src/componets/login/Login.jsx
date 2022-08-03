@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { handleHasLoged } from "../../redux/action";
 import Toast from "react-bootstrap/Toast";
-import "../login/Login.css";
+import Header from "../../common/header/Header";
 
 import axios from "axios";
 
@@ -45,6 +45,7 @@ export default function Login() {
 
   return (
     <>
+    <Header />
       {failedlogIn && (
         <Toast>
           <strong className="me-auto">Bootstrap</strong>
@@ -59,11 +60,11 @@ export default function Login() {
           <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
         </Toast>
       )}
-      <h3 className="text-center my-5">Login Form ...</h3>
       <Form
         onSubmit={handleSubmit(onSubmit)}
-        className="container mt-5 w-50 p-5 border"
+        className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5"
       >
+      <h2 className="text-center my-2 dark-text">Login</h2>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email :</Form.Label>
           <Form.Control
@@ -108,17 +109,12 @@ export default function Login() {
         <Button
           variant="primary"
           type="submit"
-          className="mt-4 d-block mx-auto"
-          style={{
-            boxShadow: "none",
-            backgroundColor: "#08A045",
-            border: "#628B48",
-          }}
+          className="my-3 d-block mx-auto home-btn"
         >
           Login
         </Button>
-        <p style={{ color: "#818181" }} className="my-2">
-          Don't have an account? <a href="">Register</a>
+        <p style={{ color: "#818181" }} className="my-2 text-center">
+          Don't have an account? <Link to='/register'>Register</Link>
         </p>
       </Form>
     </>

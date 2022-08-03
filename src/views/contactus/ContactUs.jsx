@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import { Col, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import Header from "../../common/header/Header";
+import "./ContactUs.css"
 const ContactUs = () => {
   const {
     register,
@@ -19,13 +20,12 @@ const ContactUs = () => {
     <div>
       <Header />
       <div
-        className="w-50 mx-auto border py-3 px-3"
-        style={{ marginTop: "9rem" }}
+        className="container py-3 px-3 my-5"
       >
-        <h1>Contact Us</h1>
-        <Form onSubmit={handleSubmit(onSubmit)} className="py-3">
+        <Form onSubmit={handleSubmit(onSubmit)} className="form-container border rounded mx-auto px-3 py-3">
+        <h1 className=" dark-text">Contact Us</h1>
           <Row className="mb-3">
-            <Form.Group as={Col} className="pt-3" controlId="formGridName">
+            <Form.Group as={Col} xs={12} md={6} className="pt-3" controlId="formGridName">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="text"
@@ -47,7 +47,7 @@ const ContactUs = () => {
               )}
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridName" className="pt-3">
+            <Form.Group as={Col} xs={12} md={6} controlId="formGridName" className="pt-3">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -124,8 +124,7 @@ const ContactUs = () => {
           <Button
             variant="primary"
             type="submit"
-            className="mt-3 d-block mx-auto"
-            style={{ backgroundColor: "#628B48", border: "#628B48" }}
+            className="mt-3 d-block mx-auto home-btn"
           >
             Submit
           </Button>

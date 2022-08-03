@@ -1,9 +1,26 @@
 import React from "react";
+import ReactPaginate from "react-paginate";
+
 
 // react-bootstrap components
-import { Card, Table, Container, Row, Col } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Card,
+  Navbar,
+  Nav,
+  Table,
+  Container,
+  Row,
+  Col,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+
 
 function TableList() {
+
+
   const adminObj = [
     {
       id: 1,
@@ -138,11 +155,14 @@ function TableList() {
     },
   ];
 
+ 
+
+
   return (
     <>
       <Container fluid>
         <Row>
-          <Col md="12">
+          <Col className="border  mt-5 p-3 py-4 mb-3" md="12">
             <Card className="strpied-tabled-with-hover">
               <Card.Header>
                 <Card.Title as="h4">Admins</Card.Title>
@@ -177,8 +197,17 @@ function TableList() {
                 </Table>
               </Card.Body>
             </Card>
+            <Link
+             className="text-decoration-none"
+             to={'/tableDetails'}
+             >
+            <Button
+             className="d-block m-auto " 
+            variant="secondary">See More</Button>{' '}
+            </Link>
           </Col>
-          <Col md="12">
+
+          <Col className="border  mt-5 p-3 py-5 mb-3" md="12">
             <Card className="card-plain table-plain-bg">
               <Card.Header>
                 <Card.Title as="h4">Individual</Card.Title>
@@ -215,8 +244,17 @@ function TableList() {
                 </Table>
               </Card.Body>
             </Card>
+            <Link
+              className="text-decoration-none"
+              to={'/individualDetails'}
+            >
+            <Button
+             className="d-block m-auto " 
+            variant="secondary">See More</Button>{' '}
+            </Link>
           </Col>
-          <Col md="12">
+
+          <Col className="border  mt-5 p-3 py-5" md="12">
             <Card className="card-plain table-plain-bg">
               <Card.Header>
                 <Card.Title as="h4">Orgnization</Card.Title>
@@ -257,6 +295,14 @@ function TableList() {
                 </Table>
               </Card.Body>
             </Card>
+           <Link
+           className="text-decoration-none"
+           to={'/orgDetails'}
+           >
+           <Button
+             className="d-block m-auto " 
+            variant="secondary">See More</Button>{' '}
+           </Link>
           </Col>
         </Row>
       </Container>

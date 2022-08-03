@@ -1,6 +1,6 @@
 import React from "react";
-import myImg from "../../assets/images/18.jpg";
 import { useLocation } from "react-router-dom";
+import Header from "../../common/header/Header";
 
 export default function SingleNews() {
   const location = useLocation();
@@ -8,19 +8,26 @@ export default function SingleNews() {
 
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-10 m-auto mb-4">
+    <Header />
+      <div className="container row my-4 mx-auto px-md-5">
+        <div className=" col-10 col-md-8 mx-auto">
+          <div className="">
             <img
               className="w-100"
               src={singleNews.urlToImage}
               alt="singleNews image"
             />
+
           </div>
-          <div className="col-md-10 m-auto my-3">
-            <h4>{singleNews.title}</h4>
-          </div>
-          <div className="col-md-10 mb-4 m-auto">
+          <div className="p-4">
+            <h3
+              className="my-3"
+              style={{
+                color: "#097969",
+              }}
+            >
+              {singleNews.title}
+            </h3>
             <p style={{ color: "#818181" }}>{singleNews.content}</p>
           </div>
         </div>
