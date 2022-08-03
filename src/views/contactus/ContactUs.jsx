@@ -124,8 +124,7 @@ const ContactUs = () => {
           <Button
             variant="primary"
             type="submit"
-            className="mt-3 d-block mx-auto"
-            style={{ backgroundColor: "#628B48", border: "#628B48" }}
+            className="mt-3 d-block mx-auto home-btn"
           >
             Submit
           </Button>

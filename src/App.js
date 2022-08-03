@@ -14,7 +14,6 @@ import Register from "./componets/Register/Register";
 import TableDetails from "./views/TableDetails/TableDetails";
 import IndividualDetails from './views/individualDetails/IndividualDetails';
 import OrgDetails from './views/orgDetails/OrgDetails'
-import AllNews from './componets/allNews/AllNews'
 function App() {
   return (
     <>
