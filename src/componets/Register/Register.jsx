@@ -91,7 +91,7 @@ const Register = () => {
       placeholder: "Landline",
       errorMessage: "",
       label: "Landline",
-    {
+    },{
       id: 8,
       name: "address",
       type: "text",
@@ -144,10 +144,10 @@ const Register = () => {
     console.log(values);
   };
 
-  return (
-    <div className="register">
+  return (<>
+    <div className="register mx-auto rounded p-3 my-5">
       <form onSubmit={handleSubmit}>
-        <h1 className="text-center my-5">Register</h1>
+        <h1 className="text-center mt-3 mb-5">Register</h1>
         {inputs.map((input) => (
           <FormInput
           key={input.id}
