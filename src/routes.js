@@ -1,11 +1,11 @@
 import AddUser from "./views/AddUser.js";
-import UserProfile from "./views/UserProfile.js";
-import TableList from "./views/TableList.js";
 import Badges from "./views/Badges.js";
 import AllRequests from "./views/AllRequests.js";
 import SubmitRequest from "./views/SubmitRequest.js";
 import EditProfile from "./views/EditProfile.js";
 import LeaderBord from "./views/LeaderBord.js";
+import UserProfile from "./views/UserProfile.js";
+import TableList from './views/TableList'
 
 export const superAdminRoutes = [
   {
