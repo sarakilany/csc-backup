@@ -38,7 +38,7 @@ function Admin() {
     <>
       <Header />
       <div className="wrapper">
-        {state.has_loged.type === "super_admin" && <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
+        {state.has_loged.type === "super" && <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
           <div className="main-panel" ref={mainPanel}>
             <div className="content">
               <Routes>

@@ -3,7 +3,7 @@ import { HAS_LOGED } from "./actiontypes";
 const initialState = {
   has_loged: {
     "id": "96051",
-    "type": "org",
+    "type": "super",
     "name": "Recyclobekia",
     "email": "recyclobekia@gmail.com",
     "password": "15848Asds589#efe",
