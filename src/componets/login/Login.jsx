@@ -15,6 +15,7 @@ export default function Login() {
   const getUsersData = async () => {
     let { data } = await axios.get("https://server-csc.herokuapp.com/users");
     setUsers(data);
+    console.log(data,"dataaaa");
   };
 
   const [failedlogIn, setFailedlogIn] = useState(false);

@@ -3,7 +3,7 @@ import React from "react";
 // react-bootstrap components
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
 
-function User() {
+function UserProfile() {
   return (
     <>
       <Container fluid>
@@ -202,4 +202,4 @@ function User() {
   );
 }
 
-export default User;
+export default UserProfile;
