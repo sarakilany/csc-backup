@@ -1,17 +1,26 @@
-import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/esm/Button";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Header.css";
+import { useDispatch } from "react-redux";
+import { handleHasLoged } from "../../redux/action";
+import userPhoto from '../../assets/images/profile/user-white.png';
+import orgPhoto from '../../assets/images/profile/company-white.png';
+import indvPhoto from '../../assets/images/profile/house-white.png';
+
 export default function Header() {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   return (
     <>
-      {["md"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="green-bg fixed-top">
+      {["lg"].map((expand) => (
+        <Navbar key={expand} expand={expand} className="green-bg sticky-top">
           <Container>
             <Navbar.Brand className="white-text fw-semibold" as={Link} to="/">
               LOGO
@@ -19,7 +28,7 @@ export default function Header() {
 
             <Navbar.Toggle
               aria-controls={`offcanvasNavbar-expand-${expand}`}
-              className="white-bg"
+              className="white-bg mx-3"
             />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -61,57 +70,220 @@ export default function Header() {
                     <Nav.Link className="white-text fw-semibold">
                       Stats
                     </Nav.Link>
+                    <Nav.Link
+                      as={Link}
+                      to="/allNews"
+                      className="white-text fw-semibold"
+                    >
+                      News
+                    </Nav.Link>
                   </div>
                   <div className=" d-flex flex-column flex-md-row justify-content-center align-items-md-center">
-                    <Button
-                      variant="primary"
-                      className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
-                    >
-                      Log In
-                    </Button>
-                    <Button
-                      variant="primary"
-                      className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
-                    >
-                      Sign Up
-                    </Button>
-                    <div className="user-border mx-md-1 d-block my-2 my-md-0">
-                      <NavDropdown
-                        title=""
-                        className="user-info "
-                        id={`offcanvasNavbarDropdown-expand-${expand}`}
-                      >
-                        <NavDropdown.Item
-                          to="/profile"
+                    {state.has_loged === null ? (
+                      <div className="d-flex">
+                        <Button
                           as={Link}
-                          className="white-text fw-semibold "
+                          to="/login"
+                          variant="primary"
+                          className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
                         >
-                          UserName
-                          <small className="d-block fw-light">email</small>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item
-                          href="#action5"
-                          className="white-text fw-semibold "
-                        >
-                          settings
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          to="/admin"
+                          Log In
+                        </Button>
+                        <Button
                           as={Link}
-                          className="white-text fw-semibold "
+                          to="/register"
+                          variant="primary"
+                          className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
                         >
-                          Dashboard
-                        </NavDropdown.Item>
-                        <NavDropdown.Item
-                          to="/allNews"
-                          as={Link}
-                          className="white-text fw-semibold "
-                        >
-                          News
-                        </NavDropdown.Item>
-                      </NavDropdown>
-                    </div>
+                          Sign Up
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="user-border mx-md-1 d-block my-2 my-md-0">
+                        {/* <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                                `url(${userPhoto})`,
+                            }}
+                          >
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                              href="#action5"
+                              className="white-text fw-semibold "
+                            >
+                              settings
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Dashboard
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/"
+                              as={Link}
+                              className="white-text fw-semibold "
+                              onClick={() => dispatch(handleHasLoged(null))}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown> */}
+                        {
+                        state.has_loged.type === "individual"
+                          ?(
+                            <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                                `url(${indvPhoto})`,
+                            }}
+                          >
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                              href="#action5"
+                              className="white-text fw-semibold "
+                            >
+                              settings
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Dashboard
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/"
+                              as={Link}
+                              className="white-text fw-semibold "
+                              onClick={() => dispatch(handleHasLoged(null))}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                           ):(
+                            
+                              state.has_loged.type === "org"?
+                              (
+                                <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                              `url(${orgPhoto})`,
+                            }}
+                          >
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                              href="#action5"
+                              className="white-text fw-semibold "
+                            >
+                              settings
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Dashboard
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/"
+                              as={Link}
+                              className="white-text fw-semibold "
+                              onClick={() => dispatch(handleHasLoged(null))}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                              ):(
+                                <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                              `url(${userPhoto})`,
+                            }}
+                          >
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                              href="#action5"
+                              className="white-text fw-semibold "
+                            >
+                              settings
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Dashboard
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/"
+                              as={Link}
+                              className="white-text fw-semibold "
+                              onClick={() => dispatch(handleHasLoged(null))}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                              )
+                            
+                            
+                            )
+                        } 
+                        
+                      </div>
+                    )}
                   </div>
                 </Nav>
               </Offcanvas.Body>

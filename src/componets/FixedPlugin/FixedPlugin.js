@@ -33,21 +33,7 @@ function FixedPlugin({
   image,
   setImage
 }) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     classes: "dropdown show-dropdown open",
-  //     bg_checked: true,
-  //     bgImage: this.props.bgImage,
-  //   };
-  // }
-  // handleClick = () => {
-  //   this.props.handleFixedClick();
-  // };
-  // onChangeClick = () => {
-  //   this.props.handleHasImage(!this.state.bg_checked);
-  //   this.setState({ bg_checked: !this.state.bg_checked });
-  // };
+
   return (
     <div className="fixed-plugin">
       <Dropdown>
@@ -73,34 +59,31 @@ function FixedPlugin({
             <div className="pull-right">
               <Badge
                 variant="secondary"
-                className={color === "black" ? "active" : ""}
+                className="bg-black"
                 onClick={() => setColor("black")}
+                
               ></Badge>
               <Badge
                 variant="azure"
-                className={color === "azure" ? "active" : ""}
+                className="bg-primary"
                 onClick={() => setColor("azure")}
               ></Badge>
               <Badge
                 variant="green"
-                className={color === "green" ? "active" : ""}
+                className="bg-success"
                 onClick={() => setColor("green")}
               ></Badge>
               <Badge
                 variant="orange"
-                className={color === "orange" ? "active" : ""}
+                className="bg-warning"
                 onClick={() => setColor("orange")}
               ></Badge>
               <Badge
                 variant="red"
-                className={color === "red" ? "active" : ""}
+                className="bg-danger"
                 onClick={() => setColor("red")}
               ></Badge>
-              <Badge
-                variant="purple"
-                className={color === "purple" ? "active" : ""}
-                onClick={() => setColor("purple")}
-              ></Badge>
+              
             </div>
             <div className="clearfix"></div>
           </li>
@@ -153,70 +136,8 @@ function FixedPlugin({
               <img alt="..." src={sideBarImage4}></img>
             </a>
           </li>
-          <li className="button-container">
-            <div>
-              <Button
-                block
-                className="btn-fill"
-                href="http://www.creative-tim.com/product/light-bootstrap-dashboard-react"
-                rel="noopener noreferrer"
-                target="_blank"
-                variant="info"
-              >
-                Download, it's free!
-              </Button>
-            </div>
-          </li>
-          <li className="button-container">
-            <div>
-              <Button
-                block
-                className="btn-fill"
-                href="http://www.creative-tim.com/product/light-bootstrap-dashboard-react"
-                rel="noopener noreferrer"
-                target="_blank"
-                variant="default"
-              >
-                Checkout docs.
-              </Button>
-            </div>
-          </li>
-          <li className="header-title pro-title text-center">
-            Want more components?
-          </li>
-          <li className="button-container">
-            <div>
-              <Button
-                block
-                className="btn-fill"
-                href="http://www.creative-tim.com/product/light-bootstrap-dashboard-pro-react"
-                rel="noopener noreferrer"
-                target="_blank"
-                variant="primary"
-              >
-                Get The PRO Version!
-              </Button>
-            </div>
-          </li>
-          <li className="header-title" id="sharrreTitle">
-            Thank you for sharing!
-          </li>
-          <li className="button-container mb-4">
-            <Button
-              className="btn-social btn-outline btn-round sharrre"
-              id="twitter"
-              variant="twitter"
-            >
-              <i className="fab fa-twitter"></i>· 256
-            </Button>
-            <Button
-              className="btn-social btn-outline btn-round sharrre"
-              id="facebook"
-              variant="facebook"
-            >
-              <i className="fab fa-facebook-square"></i>· 426
-            </Button>
-          </li>
+          
+          
         </Dropdown.Menu>
       </Dropdown>
     </div>

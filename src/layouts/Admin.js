@@ -1,66 +1,47 @@
-/*!
+import React from "react";
+import { useLocation, Route, Routes } from "react-router-dom";
+import Sidebar from "../componets/Sidebar/Sidebar";
+import FixedPlugin from "../componets/FixedPlugin/FixedPlugin";
+import { userRoutes, adminRoutes, superAdminRoutes } from "../routes.js";
+import sidebarImage from "../assets/images/sidebar-3.jpg";
+import Header from "../common/header/Header";
+import { useSelector } from "react-redux";
 
-=========================================================
-* Light Bootstrap Dashboard React - v2.0.1
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
 
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, { Component } from 'react'
-import {
-  useLocation,
-  Route,
-  Routes,
-} from 'react-router-dom'
-
-import Footer from '../componets/Footer/Footer'
-import Sidebar from '../componets/Sidebar/Sidebar'
-import FixedPlugin from '../componets/FixedPlugin/FixedPlugin'
-
-import routes from '../routes.js'
-
-import sidebarImage from '../assets/images/sidebar-3.jpg'
-import Header from '../common/header/Header'
-
-function Admin () {
-  const [image, setImage] = React.useState(sidebarImage)
-  const [color, setColor] = React.useState('black')
-  const [hasImage, setHasImage] = React.useState(true)
-  const location = useLocation()
-  const mainPanel = React.useRef(null)
+function Admin() {
+  const state = useSelector((state) => state);
+  const [image, setImage] = React.useState(sidebarImage);
+  const [color, setColor] = React.useState("black");
+  const [hasImage, setHasImage] = React.useState(true);
+  const location = useLocation();
+  const mainPanel = React.useRef(null);
 
   React.useEffect(() => {
-    document.documentElement.scrollTop = 0
-    document.scrollingElement.scrollTop = 0
-    mainPanel.current.scrollTop = 0
-    if (
-      window.innerWidth < 993 &&
-      document.documentElement.className.indexOf('nav-open') !== -1
-    ) {
-      document.documentElement.classList.toggle('nav-open')
-      var element = document.getElementById('bodyClick')
-      element.parentNode.removeChild(element)
+    console.log("main", mainPanel, document.documentElement);
+    if (mainPanel.current != null) {
+      document.documentElement.scrollTop = 0;
+      document.scrollingElement.scrollTop = 0;
+      mainPanel.current.scrollTop = 0;
+      if (
+        window.innerWidth < 993 &&
+        document.documentElement.className.indexOf("nav-open") !== -1
+      ) {
+        document.documentElement.classList.toggle("nav-open");
+        var element = document.getElementById("bodyClick");
+        element.parentNode.removeChild(element);
+      }
     }
-  }, [location])
+  }, [location]);
   return (
     <>
-      <div className='wrapper'>
-        <Sidebar color={color} image={hasImage ? image : ''} routes={routes} />
-        <div className='main-panel' ref={mainPanel}>
-          <Header />
-          <div className='content'>
+      <div className="wrapper">
+       {state.has_loged.type==="super"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <div className="content">
             <Routes>
-              {routes.map((prop, key) => {
-                if (prop.layout === '/admin') {
+              {superAdminRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
                   return (
                     <Route
                       exact
@@ -68,24 +49,68 @@ function Admin () {
                       element={<prop.component />}
                       key={key}
                     />
-                  )
+                  );
                 }
               })}
             </Routes>
           </div>
-          <Footer />
         </div>
+        </>}
+
+        {state.has_loged.type==="admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={adminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <div className="content">
+            <Routes>
+              {adminRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
+          </div>
+        </div>
+        </>}
+
+        {(state.has_loged.type==="org" ||state.has_loged.type==="individual" )&& 
+        <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <div className="content">
+            <Routes>
+              {userRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
+          </div>
+          </div>
+        </>}
+
       </div>
       <FixedPlugin
         hasImage={hasImage}
         setHasImage={() => setHasImage(!hasImage)}
         color={color}
-        setColor={color => setColor(color)}
+        setColor={(color) => setColor(color)}
         image={image}
-        setImage={image => setImage(image)}
+        setImage={(image) => setImage(image)}
       />
     </>
-  )
+  );
 }
 
-export default Admin
+export default Admin;
