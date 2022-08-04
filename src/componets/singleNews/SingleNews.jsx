@@ -1,29 +1,37 @@
-import React from 'react';
-import newsImg from '../../assets/images/img2.jpg';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import Header from "../../common/header/Header";
 
 export default function SingleNews() {
-  
-  return (<>
-  
-    <h3 className='text-center my-4'>Single News ..</h3>
-    <div className="container">
-      <div className="row">
-        <div className="col-md-10 m-auto mb-4">
-          <img className='w-100' src={newsImg} alt="news image" />
-        </div>
-        <div className="col-md-10 m-auto my-3">
-          <h4>Recycle Your Past And Present Than Make A Perfect Future.</h4>
-        </div>
-        <div className="col-md-10 mb-4 m-auto">
-          <p style={{color:"#818181"}}>If you are creative, then you never refuse reuse.I love woody trash because I use it.
-             Recycling is a saving of money. Don’t say sorry for recycling.
-              Never kick recycling in life.Reuse, recycle is not bullshit.
-              Recycling the environment is our biggest dream.Stop chasing waste your material.
-              Far away to be trashy.Reuse aluminum because of its superb.Save energy for recycling. Society needs recycling.</p>
+  const location = useLocation();
+  const { singleNews } = location.state;
+
+  return (
+    <>
+    <Header />
+      <div className="container row my-4 mx-auto px-md-5">
+        <div className=" col-10 col-md-8 mx-auto">
+          <div className="">
+            <img
+              className="w-100"
+              src={singleNews.urlToImage}
+              alt="singleNews image"
+            />
+
+          </div>
+          <div className="p-4">
+            <h3
+              className="my-3"
+              style={{
+                color: "#097969",
+              }}
+            >
+              {singleNews.title}
+            </h3>
+            <p style={{ color: "#818181" }}>{singleNews.content}</p>
+          </div>
         </div>
       </div>
-    </div>
-
     </>
-  )
+  );
 }

@@ -1,55 +1,23 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, { Component } from "react";
+import React from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
-
-import AdminNavbar from "../../src/componets/Navbars/AdminNavbar";
 import Footer from "../componets/Footer/Footer";
 import Sidebar from "../componets/Sidebar/Sidebar";
 import FixedPlugin from "../componets/FixedPlugin/FixedPlugin";
-
-import routes from "../routes.js";
-
+import {userRoutes,adminRoutes,superAdminRoutes} from "../routes.js";
 import sidebarImage from "../assets/images/sidebar-3.jpg";
 import Header from "../common/header/Header";
+import { useSelector } from "react-redux";
+
+
 
 function Admin() {
+  const state = useSelector((state) => state);
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
   const mainPanel = React.useRef(null);
-  const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
-        console.log(prop, "admiiiin");
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            render={(props) => <prop.component {...props} />}
-            key={key}
-          />
-        );
-      } else {
-        return null;
-      }
-    });
-  };
+
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -65,15 +33,75 @@ function Admin() {
   }, [location]);
   return (
     <>
-      <div className="wrapper">
-        <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
-        <div className="main-panel" ref={mainPanel}>
           <Header />
+      <div className="wrapper">
+       {state.has_loged.type==="super_admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
           <div className="content">
-            <Routes>{getRoutes(routes)}</Routes>
+            <Routes>
+              {superAdminRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
           </div>
           <Footer />
         </div>
+        </>}
+
+        {state.has_loged.type==="admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={adminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <Header />
+          <div className="content">
+            <Routes>
+              {adminRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+        </>}
+
+        {(state.has_loged.type==="org" ||state.has_loged.type==="individual" )&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <Header />
+          <div className="content">
+            <Routes>
+              {userRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
+          </div>
+        </div>
+        </>}
+
       </div>
       <FixedPlugin
         hasImage={hasImage}

@@ -1,18 +1,9 @@
 import React from "react";
 
 // react-bootstrap components
-import {
-  Badge,
-  Button,
-  Card,
-  Navbar,
-  Nav,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 
-function Typography() {
+function Badges() {
   return (
     <>
       <Container fluid>
@@ -144,4 +135,4 @@ function Typography() {
   );
 }
 
-export default Typography;
+export default Badges;

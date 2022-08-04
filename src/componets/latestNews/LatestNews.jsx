@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+import './LatestNews.css'
 
 export default function LatestNews() {
   const [news, setNews] = useState([]);
@@ -21,41 +23,59 @@ export default function LatestNews() {
 
   return (
     <>
-      <h3 className="text-center my-5">Home News ...</h3>
-      <div className="container border p-5">
-        <div className="row">
+      <div className="container py-2 mb-5">
+      <h2 className="text-center my-5 dark-text">Latest News</h2>
+        <div className="row align-items-stretch">
           {someNews.map((article, index) => (
-            <div key={index} className="col-md-3 my-2">
-              <Card>
+            <div key={index} className="col-md-6 col-xl-3 my-2 d-flex align-items-stretch">
+            <Card>
+              <figure style={{ height: "200px" }}>
                 <Card.Img
                   variant="top"
                   className="w-100 h-100"
                   src={article.urlToImage}
                 />
-                <Card.Body>
-                  <Card.Title>
-                    {" "}
-                    {article.title.substring(0, 35) + " ..."}
-                  </Card.Title>
-                  <Card.Text>
-                    {article.content.substring(0, 150) + "..."}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              </figure>
+              <Card.Body>
+                <Card.Title>
+                  <h4 className="dark-text mt-0">{article.title.substring(0, 35) + " ..."}</h4>
+                </Card.Title>
+                <Card.Text className="green-text">
+                  {article.content.substring(0, 150) + "..."}
+                </Card.Text>
+
+                <Link
+                  className="text-decoration-none"
+                  to={`/allNews/${article.title}`}
+                  state={{ singleNews: article }}
+                  
+                >
+                  <Button
+                    className=" shadow-none mx-auto d-block card-btn"
+                    variant="primary"
+                  >
+                    Show Details
+                  </Button>
+                </Link>
+              </Card.Body>
+            </Card>
             </div>
           ))}
         </div>
-        <Button
-          className="d-block m-auto mt-5 px-4 py-2"
-          style={{
-            boxShadow: "none",
-            backgroundColor: "#08A045",
-            border: "#628B48",
-          }}
-          variant="primary"
-        >
-          See More{" "}
-        </Button>
+
+        <Link className="text-decoration-none" to="/allNews">
+          <Button
+            className="d-block m-auto mt-3 px-4 py-2 home-btn"
+            style={{
+              boxShadow: "none",
+              backgroundColor: "#08A045",
+              border: "#628B48",
+            }}
+            variant="primary"
+          >
+            See More
+          </Button>
+        </Link>
       </div>
     </>
   );
