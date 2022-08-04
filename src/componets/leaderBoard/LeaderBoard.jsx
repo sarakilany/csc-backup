@@ -13,7 +13,17 @@ export default function LeaderBoard() {
 
   const getData = () => {
     axios.get("https://server-csc.herokuapp.com/users/").then((res) => {
-      setData(res.data);
+      const filteredData = res.data.filter(
+        (data) => data.type === "org" || data.type === "individual"
+      );
+      const sorted = filteredData
+        .map((user) => ({
+          sum: user.requests.reduce((r, e) => r + e.quantity, 0),
+          ...user,
+        }))
+        .sort((a, b) => b.sum - a.sum)
+        .map(({ sum, ...user }) => user);
+      setData(sorted);
     });
   };
 
@@ -51,6 +61,7 @@ export default function LeaderBoard() {
                           ) : (
                             <td>not assigned</td>
                           )}
+
                           {user.requests ? (
                             <td>
                               {user.requests.reduce((accumulator, object) => {
