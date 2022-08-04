@@ -78,7 +78,8 @@ function Admin() {
         </div>
         </>}
 
-        {(state.has_loged.type==="org" ||state.has_loged.type==="individual" )&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
+        {(state.has_loged.type==="org" ||state.has_loged.type==="individual" )&& 
+        <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
         <div className="main-panel" ref={mainPanel}>
           <div className="content">
             <Routes>
@@ -95,6 +96,7 @@ function Admin() {
                 }
               })}
             </Routes>
+          </div>
           </div>
         </>}
 
