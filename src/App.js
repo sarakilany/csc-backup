@@ -14,6 +14,7 @@ import Register from "./componets/Register/Register";
 import TableDetails from "./views/TableDetails/TableDetails";
 import IndividualDetails from './views/individualDetails/IndividualDetails';
 import OrgDetails from './views/orgDetails/OrgDetails'
+import Billing from "./views/billing";
 function App() {
   return (
     <>
@@ -28,9 +29,9 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="tableDetails" element={<TableDetails />} />
         <Route path="allNews/:title" element={<SingleNews />} />
-        <Route path="individualDetails" element={< IndividualDetails/>} />
-        <Route path="orgDetails" element={< OrgDetails/>} />
-        
+        <Route path="individualDetails" element={< IndividualDetails />} />
+        <Route path="orgDetails" element={< OrgDetails />} />
+        <Route path="billing" element={< Billing />} />
         <Route path="/admin/*" element={<Admin authed={true} />} />
       </Routes>
     </>
