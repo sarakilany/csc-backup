@@ -158,8 +158,7 @@ const Register = () => {
         ))}
         <CityDropdown />
         <ZoneDropdown />         
-        <Checkbox label="I Agree to the Privacy & Policy" required/>
-        <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
+        <label className="flex-row-reverse justify-content-end"><div>I Agree to the <Link to="/privacy">Privacy & Policy</Link></div><input class="checkbox-input" type="checkbox" required/></label>        <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
         <p style={{ color: "#818181" }} className="my-2 text-center">
           You have an account? <Link to='/login'>LogIn</Link>
         </p>
