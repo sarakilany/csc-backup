@@ -5,6 +5,7 @@ import Privacy from "./views/privacy/Privacy";
 import About from "./views/about/About";
 import ContactUs from "./views/contactus/ContactUs";
 import User from "./views/UserProfile";
+import UserInfo from "./componets/profile/userInfo/UserInfo.jsx";
 import Dashboard from "./views/Dashboard";
 import Icons from "./views/Icons";
 import Notifications from "./views/Notifications";
@@ -23,7 +24,7 @@ function App() {
         <Route path="privacy" element={<Privacy />} />
         <Route path="profile" element={<User />} />
         <Route path="allNews/:title" element={<SingleNews />} />
-
+        <Route path="profile/:id" element={<UserInfo />} />
 
         <Route path="/admin/*" element={<Admin authed={true} />} />
 
