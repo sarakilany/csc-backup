@@ -117,7 +117,7 @@ function AllRequests() {
             </Col>
           </Row>
         )}
-        {state.has_loged.type == "super_admin" && (
+        {state.has_loged.type == "super" && (
           <Row>
             <Col md="12">
               <Card className="strpied-tabled-with-hover">

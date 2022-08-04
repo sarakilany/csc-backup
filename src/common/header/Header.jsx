@@ -65,9 +65,6 @@ export default function Header() {
                     >
                       Contact Us
                     </Nav.Link>
-                    <Nav.Link className="white-text fw-semibold">
-                      Stats
-                    </Nav.Link>
                     <Nav.Link
                       as={Link}
                       to="/allNews"
@@ -104,27 +101,35 @@ export default function Header() {
                           id={`offcanvasNavbarDropdown-expand-${expand}`}
                         >
                           <NavDropdown.Item
-                            to="/profile"
+                            to="/user"
                             as={Link}
                             className="white-text fw-semibold "
                           >
-                            UserName
-                            <small className="d-block fw-light">email</small>
+                            Profile
+                            <small className="d-block fw-light">{state.has_loged.email}</small>
                           </NavDropdown.Item>
                           <NavDropdown.Divider />
                           <NavDropdown.Item
-                            href="#action5"
+                          to="/editProfile"
+                          as={Link}
                             className="white-text fw-semibold "
                           >
-                            settings
+                            Edit Profile
                           </NavDropdown.Item>
-                          <NavDropdown.Item
-                            to="/admin"
+                         {(state.has_loged.type==="individual" || state.has_loged.type==="org") &&<NavDropdown.Item
+                            to="/request"
                             as={Link}
                             className="white-text fw-semibold "
                           >
-                            Dashboard
-                          </NavDropdown.Item>
+                            Submit Request
+                          </NavDropdown.Item>}
+                          {(state.has_loged.type==="admin" || state.has_loged.type==="super") &&<NavDropdown.Item
+                            to="/allRequests"
+                            as={Link}
+                            className="white-text fw-semibold "
+                          >
+                            All Requests
+                          </NavDropdown.Item>}
                           <NavDropdown.Item
                             to="/"
                             as={Link}
