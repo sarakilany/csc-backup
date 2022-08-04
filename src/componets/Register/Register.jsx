@@ -129,7 +129,6 @@ const Register = () => {
   };
 
   return (<>
-    <Header />
     <div className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5">
       <form onSubmit={handleSubmit} className="w-100">
         <h2 className=" dark-text mt-0 w-100 text-center">Register</h2>

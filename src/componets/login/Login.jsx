@@ -46,7 +46,6 @@ export default function Login() {
 
   return (
     <>
-    <Header />
       {failedlogIn && (
         <Toast>
           <strong className="me-auto">Bootstrap</strong>

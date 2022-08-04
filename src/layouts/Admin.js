@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
-import Footer from "../componets/Footer/Footer";
 import Sidebar from "../componets/Sidebar/Sidebar";
 import FixedPlugin from "../componets/FixedPlugin/FixedPlugin";
 import { userRoutes, adminRoutes, superAdminRoutes } from "../routes.js";
@@ -36,72 +35,66 @@ function Admin() {
   }, [location]);
   return (
     <>
-      <Header />
       <div className="wrapper">
-        {state.has_loged.type === "super" && <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
-          <div className="main-panel" ref={mainPanel}>
-            <div className="content">
-              <Routes>
-                {superAdminRoutes.map((prop, key) => {
-                  if (prop.layout === "/admin") {
-                    return (
-                      <Route
-                        exact
-                        path={prop.path}
-                        element={<prop.component />}
-                        key={key}
-                      />
-                    );
-                  }
-                })}
-              </Routes>
-            </div>
-            <Footer />
+       {state.has_loged.type==="super"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <div className="content">
+            <Routes>
+              {superAdminRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
           </div>
+        </div>
         </>}
 
-        {state.has_loged.type === "admin" && <> <Sidebar color={color} image={hasImage ? image : ""} routes={adminRoutes} />
-          <div className="main-panel" ref={mainPanel}>
-            <Header />
-            <div className="content">
-              <Routes>
-                {adminRoutes.map((prop, key) => {
-                  if (prop.layout === "/admin") {
-                    return (
-                      <Route
-                        exact
-                        path={prop.path}
-                        element={<prop.component />}
-                        key={key}
-                      />
-                    );
-                  }
-                })}
-              </Routes>
-            </div>
-            <Footer />
+        {state.has_loged.type==="admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={adminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <div className="content">
+            <Routes>
+              {adminRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
           </div>
+        </div>
         </>}
 
-        {(state.has_loged.type === "org" || state.has_loged.type === "individual") && <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
-          <div className="main-panel" ref={mainPanel}>
-            <Header />
-            <div className="content">
-              <Routes>
-                {userRoutes.map((prop, key) => {
-                  if (prop.layout === "/admin") {
-                    return (
-                      <Route
-                        exact
-                        path={prop.path}
-                        element={<prop.component />}
-                        key={key}
-                      />
-                    );
-                  }
-                })}
-              </Routes>
-            </div>
+        {(state.has_loged.type==="org" ||state.has_loged.type==="individual" )&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <div className="content">
+            <Routes>
+              {userRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
           </div>
         </>}
 
