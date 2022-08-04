@@ -14,9 +14,11 @@ import Register from "./componets/Register/Register";
 import TableDetails from "./views/TableDetails/TableDetails";
 import IndividualDetails from './views/individualDetails/IndividualDetails';
 import OrgDetails from './views/orgDetails/OrgDetails'
+import Header from "./common/header/Header";
 function App() {
   return (
     <>
+    <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />

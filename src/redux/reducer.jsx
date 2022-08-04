@@ -3,7 +3,7 @@ import { HAS_LOGED } from "./actiontypes";
 const initialState = {
   has_loged: {
     id: "2960150400050",
-    type: "super_admin",
+    type: "org",
     name: "saad",
     email: "saad_daaw25@gmail.com",
     password: "14g38!weFew#Moe",
@@ -13,7 +13,7 @@ const initialState = {
     tel: "01014037844",
     landline: null,
     class: "C",
-    badge: "green saver",
+    badge: null,
     rank: "150",
     points: "70",
     contactPersonalName: "saad",

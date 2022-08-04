@@ -6,7 +6,6 @@ import LatestNews from "../../componets/latestNews/LatestNews";
 const Home = () => {
   return (
     <>
-      <Header />
       <Slider />
       <Section />
       <LatestNews />

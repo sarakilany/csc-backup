@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
-import Footer from "../componets/Footer/Footer";
 import Sidebar from "../componets/Sidebar/Sidebar";
 import FixedPlugin from "../componets/FixedPlugin/FixedPlugin";
 import {userRoutes,adminRoutes,superAdminRoutes} from "../routes.js";
@@ -33,9 +32,8 @@ function Admin() {
   }, [location]);
   return (
     <>
-          <Header />
       <div className="wrapper">
-       {state.has_loged.type==="super_admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
+       {state.has_loged.type==="super"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
         <div className="main-panel" ref={mainPanel}>
           <div className="content">
             <Routes>
@@ -53,13 +51,11 @@ function Admin() {
               })}
             </Routes>
           </div>
-          <Footer />
         </div>
         </>}
 
         {state.has_loged.type==="admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={adminRoutes} />
         <div className="main-panel" ref={mainPanel}>
-          <Header />
           <div className="content">
             <Routes>
               {adminRoutes.map((prop, key) => {
@@ -76,13 +72,11 @@ function Admin() {
               })}
             </Routes>
           </div>
-          <Footer />
         </div>
         </>}
 
         {(state.has_loged.type==="org" ||state.has_loged.type==="individual" )&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
         <div className="main-panel" ref={mainPanel}>
-          <Header />
           <div className="content">
             <Routes>
               {userRoutes.map((prop, key) => {
