@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
+import Header from "../../common/header/Header";
 import "./AllNews.css";
 
 const Per_Page = 12;
@@ -30,7 +31,6 @@ export default function AllNews() {
   };
 
   const handlePageClick = ({ selected: selectedPage }) => {
-    console.log("selected page ", selectedPage);
     setCurrentPage(selectedPage);
   };
 
@@ -42,61 +42,59 @@ export default function AllNews() {
   return (
     <>
       {isLoading ? (
-        <i className="my-5 fa-solid fa-spinner fa-spin"></i>
+        <div className="spinner-container d-flex justify-content-center align-items-center">
+          <i className="fa-solid fa-spinner fa-spin"></i>
+        </div>
       ) : (
-        <div className="container">
-          <div className="row">
-            <h2 className="text-center my-5">All News..</h2>
+        <div className="container mt-5 mb-3">
+            <h2 className="text-center my-5 dark-text">All News</h2>
+          <div className="row align-items-stretch">
             {currentPageData.map((article, index) => (
-              <div key={index} className="col-md-3 my-2">
-                <Card>
-                  <figure style={{ height: "200px" }}>
-                    <Card.Img
-                      variant="top"
-                      className="w-100 h-100"
-                      src={article.urlToImage}
-                    />
-                  </figure>
-                  <Card.Body>
-                    <Card.Title>
-                      <h4>{article.title.substring(0, 35) + " ..."}</h4>
-                    </Card.Title>
-                    <Card.Text>
-                      {article.content.substring(0, 150) + "..."}
-                    </Card.Text>
 
-                    <Link
-                      className="text-decoration-none"
-                      to={`/allNews/${article.title}`}
-                      state={{ singleNews: article }}
-                      
-                    >
-                      <Button
-                        style={{
-                          boxShadow: "none",
-                          backgroundColor: "#08A045",
-                          border: "#628B48",
-                        }}
-                        variant="primary"
-                      >
-                        Show Details ..
-                      </Button>
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </div>
+                      <div key={index} className="col-md-6 col-lg-4 col-xl-3 my-2 d-flex align-items-stretch">
+                      <Card>
+                        <figure style={{ height: "200px" }}>
+                          <Card.Img
+                            variant="top"
+                            className="w-100 h-100"
+                            src={article.urlToImage}
+                          />
+                        </figure>
+                        <Card.Body>
+                          <Card.Title>
+                            <h4 className="dark-text mt-0">{article.title.substring(0, 35) + " ..."}</h4>
+                          </Card.Title>
+                          <Card.Text className="green-text">
+                            {article.content.substring(0, 150) + "..."}
+                          </Card.Text>
+          
+                          <Link
+                            className="text-decoration-none"
+                            to={`/allNews/${article.title}`}
+                            state={{ singleNews: article }}
+                            
+                          >
+                            <Button
+                              className=" shadow-none mx-auto d-block card-btn"
+                              variant="primary"
+                            >
+                              Show Details
+                            </Button>
+                          </Link>
+                        </Card.Body>
+                      </Card>
+                      </div>
             ))}
-
             <ReactPaginate
               previousLabel={"<<"}
               nextLabel={">> "}
               pageCount={totalPages}
               onPageChange={handlePageClick}
-              containerClassName={"pagination"}
-              previousLinkClassName={"pagination_link"}
-              nextLinkClassName={"pagination_link"}
-              disabledClassName={"pagination_link_disabled"}
-              activeClassName={"pagination_link_active"}
+              containerClassName={"all_pagination"}
+              previousLinkClassName={"pagination_links"}
+              nextLinkClassName={"pagination_links"}
+              disabledClassName={"pagination_links_disabled"}
+              activeClassName={"pagination_links_active"}
             />
           </div>
         </div>

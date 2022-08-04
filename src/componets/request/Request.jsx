@@ -2,25 +2,27 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Col } from "react-bootstrap";
-import { appendErrors, useForm, Controller, useWatch } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import DatePicker from "react-multi-date-picker";
 import InputIcon from "react-multi-date-picker/components/input_icon";
 import transition from "react-element-popper/animations/transition";
 import "react-multi-date-picker/styles/colors/green.css";
+import { useState } from "react";
 import "./Request.css";
 
 const Request = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-        control,
-      } = useForm();
-//   const [date, setdate] = useState(new Date());
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+    control,
+  } = useForm( {mode: "onBlur"});
+    // const [date, setdate] = useState(new Date());
 
   const onSubmit = (data) => {
+    
     console.log("data", data);
     //API request
   };
@@ -32,12 +34,12 @@ const Request = () => {
     { value: "5 PM to 7 PM", label: "5 PM to 7 PM" },
     { value: "8 PM to 10 PM", label: "8 PM to 10 PM" },
   ];
-  const garbageType =[
-      { value: "metals", label: "metals" },
-      { value: "plastic", label: "plastic" },
-      { value: "papers", label: "papers" },
-      { value: "organic waste", label: "organic waste" },
-  ]
+  const garbageType = [
+    { value: "metals", label: "metals" },
+    { value: "plastic", label: "plastic" },
+    { value: "papers", label: "papers" },
+    { value: "organic waste", label: "organic waste" },
+  ];
 
   return (
     <div className="container mx-auto border rounded p-3">
@@ -97,29 +99,20 @@ const Request = () => {
         >
           <Form.Label>Date</Form.Label>
           <Controller
-            control={control}
-            name="date"
-            rules={{ required: true }} //optional
-            render={({
-              field: { onChange, name, value },
-              formState: { errors }, //optional, but necessary if you want to show an error message
-            }) => (
-              <>
-                <DatePicker
-                //   value={date}
-                //   onChange={setdate}
-                  animations={[transition({ duration: 800, from: 35 })]}
-                  render={<InputIcon />}
-                  className="rmdp-prime green custom-date"
-                  showOtherDays
-                />
-                {errors && errors.date && errors.date.type === "required" && (
-                <small className="text-danger">Select a Day </small>              )}
-              </>
-            )}
+        control={control}
+        name="dateInput"
+        rules={{ required: true }}
+        render={({ field }) => (
+          <DatePicker
+            placeholderText="Select date"
+            onChange={(date) => field.onChange(date)}
+            selected={field.value}
           />
+        )}
+      />
+      {(errors.dateInput && errors.dateInput.type === "required") && <span className="text-danger">Date is required</span>}
         </Form.Group>
-        
+
         <Form.Group
           as={Col}
           controlId="formGridCollectingType"
@@ -135,11 +128,10 @@ const Request = () => {
           />
         </Form.Group>
 
-
         <Button
           variant="primary"
           type="submit"
-          className="mt-3 d-block mx-auto"
+          className="mt-3 d-block mx-auto home-btn shadow-none"
           style={{ backgroundColor: "#628B48", border: "#628B48" }}
         >
           Submit
@@ -147,6 +139,6 @@ const Request = () => {
       </Form>
     </div>
   );
-}
+};
 
 export default Request;

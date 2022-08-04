@@ -3,6 +3,8 @@ import FormInput from "../FormInputs/formInput";
 import Checkbox from "../FormInputs/Checkbox";
 import useDropdown from '../FormInputs/useDropdown';
 import "./Register.css";
+import Header from "../../common/header/Header";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const cities = ['Cairo', 'Alexandria', 'Giza', 'Kafr al-Sheikh'];
@@ -32,6 +34,7 @@ const Register = () => {
       label: "Username",
       pattern: "^[A-Za-z0-9]{3,16}$",
       required: true,
+      
     },
     {
       id: 2,
@@ -63,14 +66,14 @@ const Register = () => {
       required: true,
     },
     {
-        id: 5,
-        name: "confirmPassword",
-        type: "password",
-        placeholder: "Confirm Password",
-        errorMessage: "Password doesn't match!",
-        label: "Confirm Password",
-        pattern: values.password,
-        required: true,
+      id: 5,
+      name: "confirmPassword",
+      type: "password",
+      placeholder: "Confirm Password",
+      errorMessage: "Password doesn't match!",
+      label: "Confirm Password",
+      pattern: values.password,
+      required: true,
     },
     {
       id: 6,
@@ -88,7 +91,6 @@ const Register = () => {
       placeholder: "Landline",
       errorMessage: "",
       label: "Landline",
-    },
     {
       id: 8,
       name: "address",
@@ -96,7 +98,7 @@ const Register = () => {
       placeholder: "Address",
       errorMessage: "You should enter your current address!",
       label: "Address",
-      required: true, 
+      required: true,
     },
     {
       id: 9,
@@ -155,11 +157,15 @@ const Register = () => {
           />
         ))}
         <CityDropdown />
-        <ZoneDropdown />
-        <Checkbox label="I Agree to the Privacy & Policy" />
-        <button type="submit">Submit</button>
+        <ZoneDropdown />         
+        <Checkbox label="I Agree to the Privacy & Policy" required/>
+        <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
+        <p style={{ color: "#818181" }} className="my-2 text-center">
+          You have an account? <Link to='/login'>LogIn</Link>
+        </p>
       </form>
     </div>
+    </>
   );
 };
 
