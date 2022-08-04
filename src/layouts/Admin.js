@@ -3,11 +3,15 @@ import { useLocation, Route, Routes } from "react-router-dom";
 import Footer from "../componets/Footer/Footer";
 import Sidebar from "../componets/Sidebar/Sidebar";
 import FixedPlugin from "../componets/FixedPlugin/FixedPlugin";
-import routes from "../routes.js";
+import {userRoutes,adminRoutes,superAdminRoutes} from "../routes.js";
 import sidebarImage from "../assets/images/sidebar-3.jpg";
 import Header from "../common/header/Header";
+import { useSelector } from "react-redux";
+
+
 
 function Admin() {
+  const state = useSelector((state) => state);
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
@@ -29,13 +33,13 @@ function Admin() {
   }, [location]);
   return (
     <>
-      <div className="wrapper">
-        <Sidebar color={color} image={hasImage ? image : ""} routes={routes} />
-        <div className="main-panel" ref={mainPanel}>
           <Header />
+      <div className="wrapper">
+       {state.has_loged.type==="super_admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={superAdminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
           <div className="content">
             <Routes>
-              {routes.map((prop, key) => {
+              {superAdminRoutes.map((prop, key) => {
                 if (prop.layout === "/admin") {
                   return (
                     <Route
@@ -51,6 +55,53 @@ function Admin() {
           </div>
           <Footer />
         </div>
+        </>}
+
+        {state.has_loged.type==="admin"&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={adminRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <Header />
+          <div className="content">
+            <Routes>
+              {adminRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
+          </div>
+          <Footer />
+        </div>
+        </>}
+
+        {(state.has_loged.type==="org" ||state.has_loged.type==="individual" )&& <> <Sidebar color={color} image={hasImage ? image : ""} routes={userRoutes} />
+        <div className="main-panel" ref={mainPanel}>
+          <Header />
+          <div className="content">
+            <Routes>
+              {userRoutes.map((prop, key) => {
+                if (prop.layout === "/admin") {
+                  return (
+                    <Route
+                      exact
+                      path={prop.path}
+                      element={<prop.component />}
+                      key={key}
+                    />
+                  );
+                }
+              })}
+            </Routes>
+          </div>
+        </div>
+        </>}
+
       </div>
       <FixedPlugin
         hasImage={hasImage}

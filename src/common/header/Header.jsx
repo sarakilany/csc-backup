@@ -80,16 +80,16 @@ export default function Header() {
                     {state.has_loged === null ? (
                       <div className="d-flex">
                         <Button
-                        as={Link}
-                        to='/login'
+                          as={Link}
+                          to="/login"
                           variant="primary"
                           className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
                         >
                           Log In
                         </Button>
                         <Button
-                        as={Link}
-                        to='/register'
+                          as={Link}
+                          to="/register"
                           variant="primary"
                           className="nav-btn mx-md-1 d-block my-2 my-md-0 white-bg green-text fw-semibold border-0 shadow-none"
                         >
