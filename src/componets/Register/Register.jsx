@@ -91,46 +91,7 @@ const Register = () => {
       placeholder: "Landline",
       errorMessage: "",
       label: "Landline",
-<<<<<<< HEAD
-||||||| merged common ancestors
-      // pattern: "",
-    },
-    {
-        id: 8,
-        name: "city",
-        type: "select",
-        placeholder: "Select your city",
-        label: "City",
-        required: true, 
-    },
-    {
-      id: 9,
-      name: "zone",
-      type: "select",
-      placeholder: "Select your zone",
-      label: "Zone",
-      required: true, 
-=======
-      // pattern: "",
-    },
-    {
-      id: 8,
-      name: "city",
-      type: "select",
-      placeholder: "Select your city",
-      label: "City",
-      required: true,
-    },
-    {
-      id: 9,
-      name: "zone",
-      type: "select",
-      placeholder: "Select your zone",
-      label: "Zone",
-      required: true,
->>>>>>> ed27739dedf0809f9697035cd0fbfbeaf7f61d1f
-    },
-    {
+    },{
       id: 8,
       name: "address",
       type: "text",
@@ -183,75 +144,25 @@ const Register = () => {
     console.log(values);
   };
 
-<<<<<<< HEAD
-  return (
-    <div className="register">
-      <form onSubmit={handleSubmit}>
-        <h1 className="text-center my-5">Register</h1>
-||||||| merged common ancestors
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  return (
-    <div className="register">
-      <form onSubmit={handleSubmit}>
-        <h1>Register</h1>
-=======
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
   return (<>
-    <div className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5">
-      <form onSubmit={handleSubmit} className="w-100">
-        <h2 className=" dark-text mt-0 w-100 text-center">Register</h2>
->>>>>>> ed27739dedf0809f9697035cd0fbfbeaf7f61d1f
+    <div className="register mx-auto rounded p-3 my-5">
+      <form onSubmit={handleSubmit}>
+        <h1 className="text-center mt-3 mb-5">Register</h1>
         {inputs.map((input) => (
           <FormInput
           key={input.id}
           {...input}
           value={values[input.name]}
-<<<<<<< HEAD
           onChange={onChange}
           />
-||||||| merged common ancestors
-          onChange={onChange} />
-          :
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-           />
-          )
-=======
-          onChange={onChange} />
-          :
-          <FormInput 
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-           />
-          )
->>>>>>> ed27739dedf0809f9697035cd0fbfbeaf7f61d1f
         ))}
-<<<<<<< HEAD
         <CityDropdown />
-        <ZoneDropdown />
-        <Checkbox label="I Agree to the Privacy & Policy" />
-        <button type="submit">Submit</button>
-||||||| merged common ancestors
-        <Checkbox label="I Agree to the Privacy & Policy" />
-        <button type="submit">Submit</button>
-=======
+        <ZoneDropdown />         
         <Checkbox label="I Agree to the Privacy & Policy" required/>
         <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
         <p style={{ color: "#818181" }} className="my-2 text-center">
           You have an account? <Link to='/login'>LogIn</Link>
         </p>
->>>>>>> ed27739dedf0809f9697035cd0fbfbeaf7f61d1f
       </form>
     </div>
     </>
