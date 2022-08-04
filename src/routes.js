@@ -6,6 +6,7 @@ import EditProfile from "./views/EditProfile.js";
 import LeaderBord from "./views/LeaderBord.js";
 import UserProfile from "./views/UserProfile.js";
 import TableList from './views/TableList'
+import Billing from "./views/billing.js";
 
 export const superAdminRoutes = [
   {
@@ -59,7 +60,7 @@ export const superAdminRoutes = [
   },
 ];
 
-export const adminRoutes  = [
+export const adminRoutes = [
   {
     path: "/user",
     name: "Profile",
@@ -81,10 +82,10 @@ export const adminRoutes  = [
     component: AllRequests,
     layout: "/admin",
   },
-  
+
 ];
 
-export const userRoutes  = [
+export const userRoutes = [
   {
     path: "/user",
     name: " Profile",
@@ -104,6 +105,13 @@ export const userRoutes  = [
     name: "Maps",
     icon: "nc-icon nc-pin-3",
     component: SubmitRequest,
+    layout: "/admin",
+  },
+  {
+    path: "/billing",
+    name: "Billing",
+    icon: "nc-icon nc-circle-09",
+    component: Billing,
     layout: "/admin",
   },
 ];
