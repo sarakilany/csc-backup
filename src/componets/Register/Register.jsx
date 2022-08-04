@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "../FormInputs/formInput";
-import FormSelect from "../FormInputs/formSelect";
 import Checkbox from "../FormInputs/Checkbox";
+import useDropdown from '../FormInputs/useDropdown';
 import "./Register.css";
 import Header from "../../common/header/Header";
 import { Link } from "react-router-dom";
 
 const Register = () => {
+  const cities = ['Cairo', 'Alexandria', 'Giza', 'Kafr al-Sheikh'];
+
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -80,7 +82,6 @@ const Register = () => {
       placeholder: "Phone",
       errorMessage: "phone number should be 11 number",
       label: "Phone",
-      // pattern: "",
       required: true,
     },
     {
@@ -88,28 +89,10 @@ const Register = () => {
       name: "landline",
       type: "tel",
       placeholder: "Landline",
-      errorMessage: "Password doesn't match!",
+      errorMessage: "",
       label: "Landline",
-      // pattern: "",
-    },
     {
       id: 8,
-      name: "city",
-      type: "select",
-      placeholder: "Select your city",
-      label: "City",
-      required: true,
-    },
-    {
-      id: 9,
-      name: "zone",
-      type: "select",
-      placeholder: "Select your zone",
-      label: "Zone",
-      required: true,
-    },
-    {
-      id: 10,
       name: "address",
       type: "text",
       placeholder: "Address",
@@ -117,37 +100,64 @@ const Register = () => {
       label: "Address",
       required: true,
     },
+    {
+      id: 9,
+      name: "addressConfirmImage",
+      type: "file",
+      placeholder: "",
+      label: "Upload electric connected or tax record",
+      required: true, 
+    }
   ];
+
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const [zones, setZones] = useState([]);
+  const [city, CityDropdown] = useDropdown("city", "Cairo", cities, onChange);
+  const [zone, ZoneDropdown, setZone] = useDropdown("zone", "", zones, onChange);
+
+  useEffect(() => {
+    // const cities = ['Cairo', 'Alexandria', 'Giza', 'Kafr al-Sheikh'];
+    const ZonesList = [
+      ['one', 'dfdfs'],
+      ['two', 'érfvr'],
+      ['three', 'ththt'],
+      ['four', 'thtjhy']
+    ];
+    setZones([]);
+    setZone("");
+
+    let id = cities.indexOf(city);
+
+    const selectZone = (id => {
+      const zoneString = ZonesList.filter((zone,i) => i === id );
+      setZones(...zoneString);
+    })
+
+    selectZone(id);    
+  }, [city, setZone]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
   };
 
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  return (<>
-    <div className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5">
-      <form onSubmit={handleSubmit} className="w-100">
-        <h2 className=" dark-text mt-0 w-100 text-center">Register</h2>
+  return (
+    <div className="register">
+      <form onSubmit={handleSubmit}>
+        <h1 className="text-center my-5">Register</h1>
         {inputs.map((input) => (
-          (input.type === 'select' ? 
-          <FormSelect 
+          <FormInput
           key={input.id}
           {...input}
           value={values[input.name]}
-          onChange={onChange} />
-          :
-          <FormInput 
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-           />
-          )
+          onChange={onChange}
+          />
         ))}
+        <CityDropdown />
+        <ZoneDropdown />         
         <Checkbox label="I Agree to the Privacy & Policy" required/>
         <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
         <p style={{ color: "#818181" }} className="my-2 text-center">
