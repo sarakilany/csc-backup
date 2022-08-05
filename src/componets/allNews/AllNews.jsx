@@ -41,7 +41,6 @@ export default function AllNews() {
 
   return (
     <>
-    <Header />
       {isLoading ? (
         <div className="spinner-container d-flex justify-content-center align-items-center">
           <i className="fa-solid fa-spinner fa-spin"></i>

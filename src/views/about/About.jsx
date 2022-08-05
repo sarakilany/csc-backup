@@ -30,7 +30,6 @@ const About = () => {
   ];
   return (
     <>
-      <Header />
       <figure className="w-100">
         <Card.Img variant="top" src={banner} />
       </figure>

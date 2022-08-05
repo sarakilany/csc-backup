@@ -4,12 +4,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/esm/Button";
-import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { useDispatch } from "react-redux";
 import { handleHasLoged } from "../../redux/action";
+import userPhoto from '../../assets/images/profile/user-white.png';
+import orgPhoto from '../../assets/images/profile/company-white.png';
+import indvPhoto from '../../assets/images/profile/house-white.png';
 
 export default function Header() {
   const state = useSelector((state) => state);
@@ -95,50 +97,149 @@ export default function Header() {
                       </div>
                     ) : (
                       <div className="user-border mx-md-1 d-block my-2 my-md-0">
-                        <NavDropdown
-                          title=""
-                          className="user-info "
-                          id={`offcanvasNavbarDropdown-expand-${expand}`}
-                        >
-                          <NavDropdown.Item
-                            to="/user"
-                            as={Link}
-                            className="white-text fw-semibold "
+                        {
+                        state.has_loged.type === "individual"
+                          ?(
+                            <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                                `url(${indvPhoto})`,
+                            }}
                           >
-                            Profile
-                            <small className="d-block fw-light">{state.has_loged.email}</small>
-                          </NavDropdown.Item>
-                          <NavDropdown.Divider />
-                          <NavDropdown.Item
-                          to="/editProfile"
-                          as={Link}
-                            className="white-text fw-semibold "
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                              to="/admin/editProfile"
+                              as={Link}                             
+                              className="white-text fw-semibold "
+                            >
+                               Edit Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Make a Request
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin/request"
+                              as={Link}
+                              className="white-text fw-semibold "
+                              onClick={() => dispatch(handleHasLoged(null))}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                           ):(
+                            
+                              state.has_loged.type === "org"?
+                              (
+                                <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                              `url(${orgPhoto})`,
+                            }}
                           >
-                            Edit Profile
-                          </NavDropdown.Item>
-                         {(state.has_loged.type==="individual" || state.has_loged.type==="org") &&<NavDropdown.Item
-                            to="/request"
-                            as={Link}
-                            className="white-text fw-semibold "
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                               to="/admin/editProfile"
+                               as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Edit Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin/request"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Submit Request
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/"
+                              as={Link}
+                              className="white-text fw-semibold "
+                              onClick={() => dispatch(handleHasLoged(null))}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                              ):(
+                                <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                              `url(${userPhoto})`,
+                            }}
                           >
-                            Submit Request
-                          </NavDropdown.Item>}
-                          {(state.has_loged.type==="admin" || state.has_loged.type==="super") &&<NavDropdown.Item
-                            to="/allRequests"
-                            as={Link}
-                            className="white-text fw-semibold "
-                          >
-                            All Requests
-                          </NavDropdown.Item>}
-                          <NavDropdown.Item
-                            to="/"
-                            as={Link}
-                            className="white-text fw-semibold "
-                            onClick={() => dispatch(handleHasLoged(null))}
-                          >
-                            LogOut
-                          </NavDropdown.Item>
-                        </NavDropdown>
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                               to="/admin/editProfile"
+                               as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Edit Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin/allRequests"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              All Requests
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/"
+                              as={Link}
+                              className="white-text fw-semibold "
+                              onClick={() => dispatch(handleHasLoged(null))}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                              )
+                            
+                            
+                            )
+                        } 
+                        
                       </div>
                     )}
                   </div>

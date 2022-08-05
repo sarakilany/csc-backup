@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormInput from "../FormInputs/formInput";
-import FormSelect from "../FormInputs/formSelect";
-import Checkbox from "../FormInputs/Checkbox";
+import useDropdown from '../FormInputs/useDropdown';
 import "./Register.css";
-import Header from "../../common/header/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { handleHasLoged } from "../../redux/action";
+import axios from "axios";
+
 
 const Register = () => {
+  const cities = ['Cairo', 'Alexandria', 'Giza', 'Kafr al-Sheikh'];
+  const types = ['individual', 'org'];
+  const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -19,6 +27,7 @@ const Register = () => {
     address: "",
     city: "",
     zone: "",
+    type: ""
   });
 
   const inputs = [
@@ -80,7 +89,6 @@ const Register = () => {
       placeholder: "Phone",
       errorMessage: "phone number should be 11 number",
       label: "Phone",
-      // pattern: "",
       required: true,
     },
     {
@@ -88,28 +96,11 @@ const Register = () => {
       name: "landline",
       type: "tel",
       placeholder: "Landline",
-      errorMessage: "Password doesn't match!",
+      errorMessage: "",
       label: "Landline",
-      // pattern: "",
     },
     {
       id: 8,
-      name: "city",
-      type: "select",
-      placeholder: "Select your city",
-      label: "City",
-      required: true,
-    },
-    {
-      id: 9,
-      name: "zone",
-      type: "select",
-      placeholder: "Select your zone",
-      label: "Zone",
-      required: true,
-    },
-    {
-      id: 10,
       name: "address",
       type: "text",
       placeholder: "Address",
@@ -117,40 +108,78 @@ const Register = () => {
       label: "Address",
       required: true,
     },
+    {
+      id: 9,
+      name: "addressConfirmImage",
+      type: "file",
+      placeholder: "",
+      label: "Upload electric connected or tax record",
+      required: true, 
+    }
   ];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values);
+  const checkUserData = async () => {
+    let { data } = await axios.get("https://server-csc.herokuapp.com/users");
+    setUsers(data);
+    console.log(data);
   };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const [zones, setZones] = useState([]);
+  const [type, TypeDropdown] = useDropdown("type", "", types, onChange);
+  const [city, CityDropdown] = useDropdown("city", "Cairo", cities, onChange);
+  const [zone, ZoneDropdown, setZone] = useDropdown("zone", "", zones, onChange);
+
+  useEffect(() => {
+    checkUserData();
+    const ZonesList = [
+      ['Old Cairo', 'El Matareya', 'Garden City', 'Heliopolis', 'Maadi', 'Zamalek'],
+      ['Al-Montazah', 'Al-Gomrok', 'El-Dekhila', 'Agam', 'borg El-Arab'],
+      ['Dokki', 'Agouza', 'Haram', 'Omrania', 'Monib'],
+      ['Desouk', 'Al‑Burulus', 'Biyala', 'Qallin', 'Al-Burulus']
+    ];
+    setZones([]);
+    setZone("");
+
+    let id = cities.indexOf(city);
+
+    const selectZone = (id => {
+      const zoneString = ZonesList.filter((zone,i) => i === id );
+      setZones(...zoneString);
+    })
+
+    selectZone(id);    
+  }, [city, setZone]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+    users.filter((user) => {
+      dispatch(handleHasLoged(user));
+      navigate("admin/profile");
+    });
+  };
+
   return (<>
-    <Header />
-    <div className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5">
-      <form onSubmit={handleSubmit} className="w-100">
-        <h2 className=" dark-text mt-0 w-100 text-center">Register</h2>
+    <div className="register mx-auto rounded p-3 my-5">
+      <form onSubmit={handleSubmit}>
+        <h1 className="text-center mt-3 mb-5">Register</h1>
+        <TypeDropdown />
+
         {inputs.map((input) => (
-          (input.type === 'select' ? 
-          <FormSelect 
+          <FormInput
           key={input.id}
           {...input}
           value={values[input.name]}
-          onChange={onChange} />
-          :
-          <FormInput 
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-           />
-          )
+          onChange={onChange}
+          />
         ))}
+        <CityDropdown />
+        <ZoneDropdown />         
         <label className="flex-row-reverse justify-content-end"><div>I Agree to the <Link to="/privacy">Privacy & Policy</Link></div><input class="checkbox-input" type="checkbox" required/></label>
-        <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
         <p style={{ color: "#818181" }} className="my-2 text-center">
           You have an account? <Link to='/login'>LogIn</Link>
         </p>

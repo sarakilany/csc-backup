@@ -18,7 +18,6 @@ const ContactUs = () => {
 
   return (
     <div>
-      <Header />
       <div
         className="container py-3 px-3 my-5"
       >
