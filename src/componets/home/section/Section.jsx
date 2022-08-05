@@ -13,9 +13,8 @@ const state = useSelector((state) => state);
   return (
 
     <div>
-    <Row>
         <h1 className="py-5 mb-0 text-uppercase text-center white-bg green-text mt-5">turn your trash into cash</h1>
-      </Row>
+      
     {(() => {
       if (state.has_loged ==null ) {
         return  <div className=" mb-2 ">
