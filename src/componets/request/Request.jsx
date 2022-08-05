@@ -4,29 +4,32 @@ import Form from "react-bootstrap/Form";
 import { Col } from "react-bootstrap";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-import DatePicker from "react-multi-date-picker";
+import DatePicker from "react-datepicker";
 import InputIcon from "react-multi-date-picker/components/input_icon";
 import transition from "react-element-popper/animations/transition";
-import "react-multi-date-picker/styles/colors/green.css";
+// import "react-multi-date-picker/styles/colors/green.css";
 import { useState } from "react";
 import "./Request.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Request = () => {
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
     control,
-  } = useForm( {mode: "onBlur"});
-    // const [date, setdate] = useState(new Date());
+  } = useForm({ mode: "onBlur" });
+
+
 
   const onSubmit = (data) => {
-    
+
     console.log("data", data);
     //API request
   };
-
+  watch("dateInput")
   const time = [
     { value: "8 AM to 10 AM", label: "8 AM to 10 AM" },
     { value: "11 AM to 1 PM", label: "11 AM to 1 PM" },
@@ -92,26 +95,18 @@ const Request = () => {
           )}
         </Form.Group>
 
-        <Form.Group
-          as={Col}
-          controlId="formGridCollectingDate"
-          className="pt-3"
-        >
-          <Form.Label>Date</Form.Label>
-          <Controller
-        control={control}
-        name="dateInput"
-        rules={{ required: true }}
-        render={({ field }) => (
-          <DatePicker
-            placeholderText="Select date"
-            onChange={(date) => field.onChange(date)}
-            selected={field.value}
-          />
-        )}
-      />
-      {(errors.dateInput && errors.dateInput.type === "required") && <span className="text-danger">Date is required</span>}
-        </Form.Group>
+        <Form.Label>Date</Form.Label>
+        <Controller
+          control={control}
+          name="dateInput"
+          render={({ field }) => (
+            <DatePicker
+              placeholderText="Select date"
+              onChange={(date) => field.onChange(date)}
+              selected={field.value}
+            />
+          )}
+        />
 
         <Form.Group
           as={Col}

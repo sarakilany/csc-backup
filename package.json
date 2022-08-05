@@ -16,6 +16,7 @@
     "react-bootstrap": "^2.4.0",
     "react-bootstrap-icons": "^1.8.4",
     "react-chartist": "^0.14.4",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.33.1",
     "react-multi-date-picker": "^3.3.0",
