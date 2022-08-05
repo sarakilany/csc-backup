@@ -128,14 +128,14 @@ export default function Header() {
                                Edit Profile
                             </NavDropdown.Item>
                             <NavDropdown.Item
-                              to="/admin"
+                              to="/admin/request"
                               as={Link}
                               className="white-text fw-semibold "
                             >
                               Make a Request
                             </NavDropdown.Item>
                             <NavDropdown.Item
-                              to="/admin/request"
+                              to="/"
                               as={Link}
                               className="white-text fw-semibold "
                               onClick={() => dispatch(handleHasLoged(null))}
