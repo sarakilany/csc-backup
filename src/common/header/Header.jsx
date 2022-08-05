@@ -134,7 +134,7 @@ export default function Header() {
                                Edit Profile
                             </NavDropdown.Item>
                             <NavDropdown.Item
-                              to="/admin"
+                              to="/admin/request"
                               as={Link}
                               className="white-text fw-semibold "
                             >

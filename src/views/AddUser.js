@@ -154,13 +154,28 @@ const AddUser = () => {
 
     selectZone(id);    
   }, [city, setZone]);
-let counter=100;
+
+
+  const generateToken = () => {
+    let d = new Date().getTime();
+
+    if(window.performance && typeof window.performance.now === "function") {
+      d += performance.now();
+    }
+
+    let token = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
+    {
+      let r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return token;
+  }
+
   const handleSubmit = (e) => {
-    e.preventDefault();
-    counter++;
     console.log(values);
   const submittedData = {
-      "id": counter,
+      "id": generateToken(),
       "type": values.type,
       "name": values.username,
       "email": values.email,
