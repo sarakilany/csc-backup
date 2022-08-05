@@ -6,8 +6,11 @@ import axios from "axios";
 
 // react-bootstrap components
 import { Container, Row } from "react-bootstrap";
+import { setUseProxies } from "immer";
 
 function Badges() {
+  const [badge, setBadge] = useState('');
+  const [id, setId] = useState();
   const [user, setUser] = useState();
   const [newUser, setNewUser] = useState();
   console.log("homeu", user);
