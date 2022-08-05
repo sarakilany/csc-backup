@@ -98,16 +98,18 @@ function AllRequests() {
 
                     <tbody>
                       {req.map((req, i) => {
-                        return (
+                        if(req.status=="pending")
+                      {  return (
                           <>
                             <tr>
                               <td> {req.req_Id}</td>
                               <td> {req.req_date}</td>
                               <td> {req.time_slot}</td>
                               <td> {req.status}</td>
+                              
                             </tr>
                           </>
-                        );
+                        );}
                       })}
                     </tbody>
                   </Table>
@@ -116,49 +118,84 @@ function AllRequests() {
             </Col>
           </Row>
         )}
-        {state.has_loged.type == "super" && (
-          <Row>
-            <Col md="12">
-              <Card className="strpied-tabled-with-hover">
-                <Card.Header>
-                  <Card.Title as="h4">All requests</Card.Title>
-                  <p className="card-category">check your requests data</p>
-                </Card.Header>
-                <Card.Body className="table-full-width table-responsive px-0">
-                  <Table className="table-hover table-striped">
-                    <thead>
-                      <tr>
-                        <th className="border-0">Admin ID</th>
-                        <th className="border-0">Request ID</th>
-                        <th className="border-0">Request Date</th>
-                        <th className="border-0">Time Slot</th>
-                        <th className="border-0">Request Status</th>
-                        <th className="border-0">Quantity</th>
-                      </tr>
-                    </thead>
+        {state.has_loged.type=="super" &&
+        (<Row className="my-5">
+        <Col md="12" style={{backgroundColor:"#fcbf49"}}>
+          <Card className="strpied-tabled-with-hover">
+            <Card.Header>
+              <Card.Title as="h4">Pending Requests</Card.Title>
+              <p className="card-category">check your requests data</p>
+            </Card.Header>
+            <Card.Body className="table-full-width table-responsive px-0">
+              <Table className="table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th className="border-0">Request ID</th>
+                    <th className="border-0">Request Date</th>
+                    <th className="border-0">Time Slot</th>
+                    <th className="border-0">Request Status</th>
+                  </tr>
+                </thead>
 
-                    <tbody>
-                      {req.map((req, i) => {
-                        return (
-                          <>
-                            <tr>
-                              <td> {req.admin_Id}</td>
-                              <td> {req.req_Id}</td>
-                              <td> {req.req_date}</td>
-                              <td> {req.time_slot}</td>
-                              <td> {req.status}</td>
-                              <td> {req.quantity}</td>
-                            </tr>
-                          </>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        )}
+                <tbody>
+                  {req.map((req, i) => {
+                    if(req.status =="pending")
+                    {return (
+                      <>
+                        <tr>
+                          <td> {req.req_Id}</td>
+                          <td> {req.req_date}</td>
+                          <td> {req.time_slot}</td>
+                          <td> {req.status}</td>
+                        </tr>
+                      </>
+                    );}
+                  })}
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>)}
+      {state.has_loged.type=="super" &&
+        (<Row>
+        <Col md="12" style={{backgroundColor:"#48cae4"}}>
+          <Card className="strpied-tabled-with-hover" >
+            <Card.Header>
+              <Card.Title as="h4">Completed Requests</Card.Title>
+              <p className="card-category">check your requests data</p>
+            </Card.Header>
+            <Card.Body className="table-full-width table-responsive px-0">
+              <Table className="table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th className="border-0">Request ID</th>
+                    <th className="border-0">Request Date</th>
+                    <th className="border-0">Time Slot</th>
+                    <th className="border-0">Request Status</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {req.map((req, i) => {
+                    if(req.status =="completed")
+                    {return (
+                      <>
+                        <tr>
+                          <td> {req.req_Id}</td>
+                          <td> {req.req_date}</td>
+                          <td> {req.time_slot}</td>
+                          <td> {req.status}</td>
+                        </tr>
+                      </>
+                    );}
+                  })}
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>)}
       </Container>
     </>
   );
