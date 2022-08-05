@@ -33,7 +33,7 @@ export default function Login() {
     users.filter((user) => {
       if (details.email === user.email && details.password === user.password) {
         dispatch(handleHasLoged(user));
-        navigate("/admin/dashboard");
+        navigate("/admin/user");
       } else {
         setFailedlogIn(true);
         reset(user.data);
