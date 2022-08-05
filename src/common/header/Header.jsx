@@ -67,9 +67,6 @@ export default function Header() {
                     >
                       Contact Us
                     </Nav.Link>
-                    <Nav.Link className="white-text fw-semibold">
-                      Stats
-                    </Nav.Link>
                     <Nav.Link
                       as={Link}
                       to="/allNews"
