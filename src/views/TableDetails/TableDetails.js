@@ -1,165 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import {Card,Col, Table} from "react-bootstrap";
 import ReactPaginate from "react-paginate";
-import { useState } from 'react';
 import  '../TableDetails/TableDetails.css'
+import axios from "axios";
 
 
 export default function TableDetails() {
+  const [users, setUsers] = useState();
     const Per_Page = 6;
   const [currentPage, setCurrentPage] = useState(0);
 
-    const adminObj = [
-        {
-          id: 1,
-          name: "ali",
-          tel: "01223344556",
-          email: "mmmmm@mmm.com",
-          city: "alex",
-        },
-        {
-          id: 2,
-          name: "ahmed",
-          tel: "01223344556",
-          email: "mmmmm@mmm.com",
-          city: "cairo",
-        },
-        {
-          id: 3,
-          name: "sama",
-          tel: "01223344556",
-          email: "mmmmm@mmm.com",
-          city: "siwa",
-        },
-        {
-          id: 4,
-          name: "aya",
-          tel: "01223344556",
-          email: "mmmmm@mmm.com",
-          city: "qena",
-        },
-        {
-          id: 5,
-          name: "mona",
-          tel: "01223344556",
-          email: "mmmmm@mmm.com",
-          city: "alex",
-        },
-        {
-            id: 6,
-            name: "mona",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "alex",
-          },
-          {
-            id: 7,
-            name: "mona",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "alex",
-          },
-          {
-            id: 8,
-            name: "mona",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "alex",
-          },
-          {
-            id: 9,
-            name: "mona",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "alex",
-          },
-          {
-            id: 10,
-            name: "mona",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "alex",
-          },
-          {
-            id: 11,
-            name: "ali",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "alex",
-          },
-          {
-            id: 12,
-            name: "ahmed",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "cairo",
-          },
-          {
-            id: 13,
-            name: "sama",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "siwa",
-          },
-          {
-            id: 14,
-            name: "aya",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "qena",
-          },
-          {
-            id: 15,
-            name: "mona",
-            tel: "01223344556",
-            email: "mmmmm@mmm.com",
-            city: "alex",
-          },
-          {
-              id: 16,
-              name: "mona",
-              tel: "01223344556",
-              email: "mmmmm@mmm.com",
-              city: "alex",
-            },
-            {
-              id: 17,
-              name: "mona",
-              tel: "01223344556",
-              email: "mmmmm@mmm.com",
-              city: "alex",
-            },
-            {
-              id: 18,
-              name: "mona",
-              tel: "01223344556",
-              email: "mmmmm@mmm.com",
-              city: "alex",
-            },
-            {
-              id: 19,
-              name: "mona",
-              tel: "01223344556",
-              email: "mmmmm@mmm.com",
-              city: "alex",
-            },
-            {
-              id: 20,
-              name: "mona",
-              tel: "01223344556",
-              email: "mmmmm@mmm.com",
-              city: "alex",
-            },
-      ];
+  const getusersData = async () => {
+    let { data } = await axios.get("https://server-csc.herokuapp.com/users");
+    setUsers(data);
+  };
+  useEffect(() => {
+    getusersData();
+  }, []);
 
+    
       const handlePageClick = ({ selected: selectedPage }) => {
         console.log("selected page ", selectedPage);
         setCurrentPage(selectedPage);
       };
 
       const offset = currentPage * Per_Page;
-      const currentPageData = adminObj.slice(offset, offset + Per_Page);
-      const totalPages = Math.ceil(adminObj.length) / Per_Page;
+      const currentPageData = users.slice(offset, offset + Per_Page);
+      const totalPages = Math.ceil(users.length) / Per_Page;
 
 
   return (
