@@ -159,7 +159,7 @@ const Register = () => {
     console.log(values);
     users.filter((user) => {
       dispatch(handleHasLoged(user));
-      navigate("admin/profile");
+      navigate("/admin/user");
     });
   };
 

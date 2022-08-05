@@ -7,7 +7,10 @@ import './section.css'
 
 const Section = () => {
   return (<>
-    <Container className="pt-5">
+      <Row>
+        <h1 className="py-5 mb-0 text-uppercase text-center white-bg green-text mt-5">turn your trash into cash</h1>
+      </Row>
+    <Container >
       <Row className="py-3 py-lg-5">
         <Col className="py-3 py-lg-5">
           <img

@@ -100,48 +100,6 @@ export default function Header() {
                       </div>
                     ) : (
                       <div className="user-border mx-md-1 d-block my-2 my-md-0">
-                        {/* <NavDropdown
-                            title=""
-                            className="user-info position-relative "
-                            id={`offcanvasNavbarDropdown-expand-${expand}`}
-                            style={{
-                              backgroundImage:
-                                `url(${userPhoto})`,
-                            }}
-                          >
-                            <NavDropdown.Item
-                              to="/admin/user"
-                              as={Link}
-                              className="white-text fw-semibold text-capitalize "
-                            >
-                              {state.has_loged.name}
-                              <small className="d-block fw-light">
-                                {state.has_loged.email}
-                              </small>
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item
-                              href="#action5"
-                              className="white-text fw-semibold "
-                            >
-                              settings
-                            </NavDropdown.Item>
-                            <NavDropdown.Item
-                              to="/admin"
-                              as={Link}
-                              className="white-text fw-semibold "
-                            >
-                              Dashboard
-                            </NavDropdown.Item>
-                            <NavDropdown.Item
-                              to="/"
-                              as={Link}
-                              className="white-text fw-semibold "
-                              onClick={() => dispatch(handleHasLoged(null))}
-                            >
-                              LogOut
-                            </NavDropdown.Item>
-                          </NavDropdown> */}
                         {
                         state.has_loged.type === "individual"
                           ?(
