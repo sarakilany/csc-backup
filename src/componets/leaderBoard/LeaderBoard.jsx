@@ -13,7 +13,8 @@ export default function LeaderBoard() {
 
   const getData = () => {
     axios.get("https://server-csc.herokuapp.com/users/").then((res) => {
-      setData(res.data);
+      const filteredData = res.data.filter((data => (data.type === 'org' || data.type === 'individual')));
+      setData(filteredData);
     });
   };
 
@@ -41,6 +42,7 @@ export default function LeaderBoard() {
                   </thead>
                   <tbody>
                     {data.map((user, index) => {
+
                       return (
                         <tr key={index}>
                           <td> {index + 1}</td>

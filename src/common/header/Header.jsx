@@ -67,9 +67,6 @@ export default function Header() {
                     >
                       Contact Us
                     </Nav.Link>
-                    <Nav.Link className="white-text fw-semibold">
-                      Stats
-                    </Nav.Link>
                     <Nav.Link
                       as={Link}
                       to="/allNews"
@@ -124,20 +121,21 @@ export default function Header() {
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item
-                              href="#action5"
+                              to="/admin/editProfile"
+                              as={Link}                             
                               className="white-text fw-semibold "
                             >
-                              settings
+                               Edit Profile
                             </NavDropdown.Item>
                             <NavDropdown.Item
                               to="/admin"
                               as={Link}
                               className="white-text fw-semibold "
                             >
-                              Dashboard
+                              Make a Request
                             </NavDropdown.Item>
                             <NavDropdown.Item
-                              to="/"
+                              to="/admin/request"
                               as={Link}
                               className="white-text fw-semibold "
                               onClick={() => dispatch(handleHasLoged(null))}
@@ -170,17 +168,18 @@ export default function Header() {
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item
-                              href="#action5"
+                               to="/admin/editProfile"
+                               as={Link}
                               className="white-text fw-semibold "
                             >
-                              settings
+                              Edit Profile
                             </NavDropdown.Item>
                             <NavDropdown.Item
-                              to="/admin"
+                              to="/admin/request"
                               as={Link}
                               className="white-text fw-semibold "
                             >
-                              Dashboard
+                              Submit Request
                             </NavDropdown.Item>
                             <NavDropdown.Item
                               to="/"
@@ -213,17 +212,18 @@ export default function Header() {
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item
-                              href="#action5"
+                               to="/admin/editProfile"
+                               as={Link}
                               className="white-text fw-semibold "
                             >
-                              settings
+                              Edit Profile
                             </NavDropdown.Item>
                             <NavDropdown.Item
-                              to="/admin"
+                              to="/admin/allRequests"
                               as={Link}
                               className="white-text fw-semibold "
                             >
-                              Dashboard
+                              All Requests
                             </NavDropdown.Item>
                             <NavDropdown.Item
                               to="/"

@@ -25,7 +25,9 @@ function Badges() {
     let { data } = await axios.get(
       `https://server-csc.herokuapp.com/users/${myId}`
     );
+    console.log("here", data)
     setUser(data);
+    return data
   }
   const updateBadge = (myId, newUser) => {
     axios.put(`https://server-csc.herokuapp.com/users/${myId}`, newUser)
@@ -35,101 +37,35 @@ function Badges() {
   const onSubmit = async (data) => {
 
     setBadge(data.badge);
-    await getUser(data.userid);
-    console.log(user);
-    setNewUser({
+    const userData = await getUser(data.userid);
+    console.log("ser", user);
+    const submittedData = {
       "id": data.userid,
-      "email": user.email,
-      "password": user.password,
-      "city": user.city,
-      "zone": user.zone,
-      "address": user.address,
-      "tel": user.tel,
-      "landline": user.landline,
-      "class": user.class,
+      "type": userData.type,
+      "name": userData.name,
+      "email": userData.email,
+      "password": userData.password,
+      "city": userData.city,
+      "zone": userData.zone,
+      "address": userData.address,
+      "tel": userData.tel,
+      "landline": userData.landline,
+      "class": userData.class,
       "badge": data.badge,
-      "rank": user.rank,
-      "points": user.points,
-      "contactPersonalName": user.contactPersonalName,
-      "addressConfirmImage": user.addressConfirmImage,
-      "statusVerification": user.statusVerification,
-      "requests": user.requests,
-    })
+      "rank": userData.rank,
+      "points": userData.points,
+      "contactPersonalName": userData.contactPersonalName,
+      "addressConfirmImage": userData.addressConfirmImage,
+      "statusVerification": userData.statusVerification,
+      "requests": userData.requests,
+
+    }
+
+    setNewUser(submittedData);
+    console.log(submittedData);
     console.log(newUser);
-    updateBadge(data.userid, newUser);
+    updateBadge(data.userid, submittedData);
   }
-
-
-
-
-  // users.filter((user) => {
-  //   if (data.email === user.email && data.password === user.password) {
-  //     dispatch(handleHasLoged(user.role));
-  //     navigate("/admin/*");
-  //   } else {
-  //     setFailedlogIn(true);
-  //     reset(user.data);
-  //   }
-  // });
-  //};
-  // let user = axios.get('https://server-csc.herokuapp.com/users/96051').then(r => r.data)
-  // axios.put('https://server-csc.herokuapp.com/users/96051', {
-  //   "id": 96051,
-  //   "type": 'org',
-  //   "name": 'Recyle co',
-  //   "email": "recycle@yahoo.com",
-  //   "password": "kjerR#$ad@",
-  //   "city": 'cairo',
-  //   "zone": 'Nasr City',
-  //   "address": "Apt 3, Buliding No 6, wafeek.St, nasr city, cairo",
-  //   "tel": "01014037844",
-  //   "landline": null,
-  //   "class": 'C',
-  //   "badge": "green saver",
-  //   "rank": '150',
-  //   "points": '90',
-  //   "contactPersonalName": "saad",
-  //   "addressConfirmImage": null,
-  //   "statusVerification": "verfied",
-  //   "requests": [
-  //     {
-  //       "admin_Id": "2980150400040",
-  //       "req_Id": 0,
-  //       "req_date": "26/07/2022",
-  //       "time_slot": "02:00AM - 03:00AM",
-  //       "status": "pending",
-  //       "quantity": 9.5
-  //     },
-  //     {
-  //       "admin_Id": "2980150400040",
-  //       "req_Id": 1,
-  //       "req_date": "24/06/2022",
-  //       "time_slot": "06:00PM - 09:00PM",
-  //       "status": "completed",
-  //       "quantity": 12
-  //     }
-  //   ],
-  // });
-  // axios.put('https://server-csc.herokuapp.com/users/' + id, {
-  //   "id": id,
-  //   "type": user.type,
-  //   "name": user.name,
-  //   "email": user.email,
-  //   "password": user.password,
-  //   "city": user.city,
-  //   "zone": user.zone,
-  //   "address": user.address,
-  //   "tel": user.tel,
-  //   "landline": user.langline,
-  //   "class": user.class,
-  //   "badge": badge,
-  //   "rank": user.rank,
-  //   "points": user.points,
-  //   "contactPersonalName": user.contactPersonalName,
-  //   "addressConfirmImage": user.addressConfirmImage,
-  //   "statusVerification": user.statusVerification,
-  //   "requests": user.requests,
-  // });
 
   return (
     <>
