@@ -38,7 +38,7 @@ function Footer() {
                     <h4 className='fs-5 mt-1'>Our Media</h4>
                     <a target="_blank" rel='noreferrer' href="https://www.facebook.com/Community-Scrap-Collector-105916102216652/" className='footer-i overflow-hidden mb-2 white-text p-1 d-block rounded-circle d-flex justify-content-center align-items-center text-decoration-none'><i class="fa-brands fa-facebook-f"></i></a>
                     <a target="_blank" rel='noreferrer' href="https://www.twiter.com" className='footer-i overflow-hidden mb-2 white-text p-1 d-block rounded-circle d-flex justify-content-center align-items-center text-decoration-none'><i class="fa-brands fa-twitter"></i></a>
-                    <a target="_blank" rel='noreferrer' href="https://www.instagram.com" className='footer-i overflow-hidden mb-2 white-text p-1 d-block rounded-circle d-flex justify-content-center align-items-center text-decoration-none'><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a target="_blank" rel='noreferrer' href="https://www.linkedin.com" className='footer-i overflow-hidden mb-2 white-text p-1 d-block rounded-circle d-flex justify-content-center align-items-center text-decoration-none'><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div className='col-lg-2 col-md-4 my-4 d-flex flex-column align-items-stretch justify-content-center'>

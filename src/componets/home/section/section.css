@@ -15,8 +15,8 @@
         color:#0b6e4f !important;
         background-color: #0b6e4f00 !important ;
         border: 2px solid #0b6e4f !important;
-        transition: all 0.4s ease-in;
-        border-radius: px !important;
+        transition: all 0.3s ease-in !important;
+        border-radius: 2px !important;
     }
 .home-btn:hover{
     color:#F3F9E3 !important;

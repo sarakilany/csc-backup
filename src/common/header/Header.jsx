@@ -5,7 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/esm/Button";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useDispatch } from "react-redux";
 import { handleHasLoged } from "../../redux/action";
@@ -16,6 +16,12 @@ import indvPhoto from '../../assets/images/profile/house-white.png';
 export default function Header() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const OnLogOut =()=>{
+    dispatch(handleHasLoged(null));
+    navigate("/")
+    window.scrollTo(0, 0);
+}
 
   return (
     <>
@@ -135,10 +141,8 @@ export default function Header() {
                               Make a Request
                             </NavDropdown.Item>
                             <NavDropdown.Item
-                              to="/"
-                              as={Link}
                               className="white-text fw-semibold "
-                              onClick={() => dispatch(handleHasLoged(null))}
+                              onClick={() => OnLogOut()}
                             >
                               LogOut
                             </NavDropdown.Item>
@@ -181,11 +185,9 @@ export default function Header() {
                             >
                               Submit Request
                             </NavDropdown.Item>
-                            <NavDropdown.Item
-                              to="/"
-                              as={Link}
+                            <NavDropdown.Item                              
                               className="white-text fw-semibold "
-                              onClick={() => dispatch(handleHasLoged(null))}
+                              onClick={() => OnLogOut()}
                             >
                               LogOut
                             </NavDropdown.Item>
@@ -225,11 +227,9 @@ export default function Header() {
                             >
                               All Requests
                             </NavDropdown.Item>
-                            <NavDropdown.Item
-                              to="/"
-                              as={Link}
+                            <NavDropdown.Item                      
                               className="white-text fw-semibold "
-                              onClick={() => dispatch(handleHasLoged(null))}
+                              onClick={() => OnLogOut()}
                             >
                               LogOut
                             </NavDropdown.Item>

@@ -65,12 +65,7 @@ export default function LatestNews() {
 
         <Link className="text-decoration-none" to="/allNews">
           <Button
-            className="d-block m-auto mt-3 px-4 py-2 home-btn"
-            style={{
-              boxShadow: "none",
-              backgroundColor: "#08A045",
-              border: "#628B48",
-            }}
+            className="d-block m-auto mt-3 px-4 py-2 home-btn shadow-none"
             variant="primary"
           >
             See More

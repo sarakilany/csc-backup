@@ -108,12 +108,20 @@ export const userRoutes = [
     layout: "/admin",
   },
   {
+    path: "/allRequests",
+    name: "All Requests",
+    icon: "nc-icon nc-atom",
+    component: AllRequests,
+    layout: "/admin",
+  },
+  {
     path: "/billing",
     name: "Billing",
     icon: "nc-icon nc-circle-09",
     component: Billing,
     layout: "/admin",
   },
+  
 ];
 
 

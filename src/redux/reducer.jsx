@@ -20,22 +20,7 @@ const initialState = {
     "addressConfirmImage": null,
     "statusVerification": "verfied",
     "requests": [
-      {
-        "admin_Id": "2980150400022",
-        "req_Id": 0,
-        "req_date": "26/07/2022",
-        "time_slot": "02:00AM - 03:00AM",
-        "status": "pending",
-        "quantity": 10.5
-      },
-      {
-        "admin_Id": "2980150400022",
-        "req_Id": 1,
-        "req_date": "24/06/2022",
-        "time_slot": "06:00PM - 09:00PM",
-        "status": "completed",
-        "quantity": 11
-      }
+      
     ]
   },
 
