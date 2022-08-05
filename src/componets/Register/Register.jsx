@@ -15,8 +15,6 @@ const Register = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const [users, setUsers] = useState([]);
-
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -170,6 +168,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <h1 className="text-center mt-3 mb-5">Register</h1>
         <TypeDropdown />
+
         {inputs.map((input) => (
           <FormInput
           key={input.id}
@@ -180,6 +179,7 @@ const Register = () => {
         ))}
         <CityDropdown />
         <ZoneDropdown />
+
         <Checkbox label="I Agree to the Privacy & Policy" required/>
         <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
         <p style={{ color: "#818181" }} className="my-2 text-center">

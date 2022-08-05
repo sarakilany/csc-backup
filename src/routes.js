@@ -102,7 +102,7 @@ export const userRoutes = [
   },
   {
     path: "/request",
-    name: "Maps",
+    name: "Requests",
     icon: "nc-icon nc-pin-3",
     component: SubmitRequest,
     layout: "/admin",
