@@ -24,7 +24,7 @@ function Sidebar({ color, image, routes }) {
           >
             <div className="logo-img">
               <img
-                src={require("../../assets/images/reactlogo.png")}
+                src={require("../../assets/images/logo.png")}
                 alt="..."
               />
             </div>

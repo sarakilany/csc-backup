@@ -12,6 +12,7 @@ import { handleHasLoged } from "../../redux/action";
 import userPhoto from '../../assets/images/profile/user-white.png';
 import orgPhoto from '../../assets/images/profile/company-white.png';
 import indvPhoto from '../../assets/images/profile/house-white.png';
+import logo from '../../assets/images/logo.png'
 
 export default function Header() {
   const state = useSelector((state) => state);
@@ -26,10 +27,10 @@ export default function Header() {
   return (
     <>
       {["lg"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="green-bg sticky-top">
+        <Navbar key={expand} expand={expand} className="green-bg sticky-top py-0">
           <Container>
-            <Navbar.Brand className="white-text fw-semibold" as={Link} to="/">
-              LOGO
+            <Navbar.Brand className="white-text fw-semibold my-0" as={Link} to="/">
+              <img src={logo} alt="logo" className="logo-pic"/>
             </Navbar.Brand>
 
             <Navbar.Toggle

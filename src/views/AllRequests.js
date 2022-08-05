@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Table, Container, Row, Col } from "react-bootstrap";
+import { Card, Table, Container, Row, Col, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -9,28 +9,43 @@ function AllRequests() {
   const dispatch = useDispatch();
 
   const [req, setRequests] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [newReq, setNewReq] = useState({});
   useEffect(() => {
-    getusersData();
+    getRequests();
   }, []);
-  useEffect(() => {
-    getRequestsData();
-  }, [users]);
+ 
 
-  const getusersData = async () => {
-    let { data } = await axios.get("https://server-csc.herokuapp.com/users");
-    setUsers(data);
+  const getRequests = async () => {
+    let { data } = await axios.get("https://server-csc.herokuapp.com/requests");
+    console.log(data);
+    setRequests(data);
   };
+  const updateReq = (myId, newRequest) => {
+    axios.put(`https://server-csc.herokuapp.com/requests/${myId}`, newRequest);
+  }
 
-  const getRequestsData = () => {
-    users.map((user) => {
-      if (user.requests != null) {
-        user.requests.map((request) => {
-          req.push(request);
-        });
+  const delReq =(id)=>{
+    const myNewReq = req.find((ele,ind)=>{
+      return id == ele.req_Id
       }
-    });
-  };
+      )
+      console.log("new ele",myNewReq);
+      setNewReq({
+        "id": myNewReq.id,
+        "user_Id": myNewReq.user_Id,
+        "admin_Id": myNewReq.admin_Id,
+        "req_date": myNewReq.req_date,
+        "time_slot": myNewReq.time_slot,
+        "status": "completed",
+        "quantity": 10
+      })
+      
+    
+    setRequests(req.filter((ele,index)=>{
+      return id!==ele.req_Id
+    }))
+    // updateReq(id,newReq)
+  }
 
   return (
     <>
@@ -93,6 +108,7 @@ function AllRequests() {
                         <th className="border-0">Request Date</th>
                         <th className="border-0">Time Slot</th>
                         <th className="border-0">Request Status</th>
+                        <th className="border-0">Action</th>
                       </tr>
                     </thead>
 
@@ -106,6 +122,7 @@ function AllRequests() {
                               <td> {req.req_date}</td>
                               <td> {req.time_slot}</td>
                               <td> {req.status}</td>
+                              <td> <Button onClick={()=> delReq(req.req_Id)}>Completed</Button></td>
                               
                             </tr>
                           </>

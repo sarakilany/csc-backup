@@ -4,6 +4,8 @@ import { useSelector,useDispatch } from 'react-redux';
 import { handleHasLoged } from "../../redux/action";
 import { Button } from 'reactstrap';
 import "./Footer.css";
+import logo from '../../assets/images/logo.png'
+
 
 function Footer() {
     const state = useSelector((state) => state);
@@ -19,11 +21,10 @@ function Footer() {
     <div className='my-footer green-bg py-3'>
         <div className="container mx-auto row">
             <div className='col-lg-3 col-md-6 my-4'>
-                <div className='d-flex'>
-                    <img src="" alt="" />
-                    <h4 className='fs-5 mt-1'>CSC</h4>
+                <div className='d-flex align-items-center'>
+                <img src={logo} alt="logo" className="logo-pic me-3"/>                    <h4 className='fs-5 mt-1'>CSC</h4>
                 </div>
-                <p className=' footer-text text-white'>&copy; Community Scrap Collector 2022</p>
+                <p className='pt-2 footer-text text-white'>&copy; Community Scrap Collector 2022</p>
             </div>
             <div className='col-lg-3 col-md-6 my-4'>
                 <div>
