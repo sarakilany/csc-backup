@@ -16,6 +16,7 @@ import LeaderBoard from "./componets/leaderBoard/LeaderBoard";
 import IndividualDetails from './views/individualDetails/IndividualDetails';
 import OrgDetails from './views/orgDetails/OrgDetails'
 import Header from "./common/header/Header";
+import Footer from "./common/footer/Footer";
 function App() {
   return (
     <>
@@ -38,6 +39,7 @@ function App() {
 
         <Route path="/admin/*" element={<Admin authed={true} />} />
       </Routes>
+      <Footer />
     </>
   );
 }

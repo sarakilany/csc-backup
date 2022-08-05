@@ -9,10 +9,13 @@ import './section.css'
 
 const Section = () => {
 const state = useSelector((state) => state);
-console.log(state);
+
   return (
 
     <div>
+    <Row>
+        <h1 className="py-5 mb-0 text-uppercase text-center white-bg green-text mt-5">turn your trash into cash</h1>
+      </Row>
     {(() => {
       if (state.has_loged ==null ) {
         return  <div className=" mb-2 white-bg">
@@ -21,6 +24,7 @@ console.log(state);
    <Col className="col-12 col-lg-6 py-3 py-lg-5 justify-content-center align-items-center flex-column d-flex">
      <h2 className="text-center green-text">
        Save your organization the trouble of wasting time,money and effort
+
           </h2>
           <Button
             variant="primary"
