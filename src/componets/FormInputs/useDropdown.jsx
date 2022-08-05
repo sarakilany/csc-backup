@@ -20,6 +20,7 @@ const useDropdown = (label, defaultState, options, onChange ) => {
         onChange={(e) => handleSelect(e)}
         onBlur={(e) => handleSelect(e)}
         disabled={options.length === 0}
+        required
       >
         <option>All</option>
         {options.map((item) => (

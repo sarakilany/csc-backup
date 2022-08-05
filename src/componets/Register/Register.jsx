@@ -3,11 +3,17 @@ import FormInput from "../FormInputs/formInput";
 import Checkbox from "../FormInputs/Checkbox";
 import useDropdown from '../FormInputs/useDropdown';
 import "./Register.css";
-import Header from "../../common/header/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { handleHasLoged } from "../../redux/action";
+import axios from "axios";
+
 
 const Register = () => {
   const cities = ['Cairo', 'Alexandria', 'Giza', 'Kafr al-Sheikh'];
+  const types = ['individual', 'org'];
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const [values, setValues] = useState({
     username: "",
@@ -21,6 +27,7 @@ const Register = () => {
     address: "",
     city: "",
     zone: "",
+    type: ""
   });
 
   const inputs = [
@@ -91,7 +98,8 @@ const Register = () => {
       placeholder: "Landline",
       errorMessage: "",
       label: "Landline",
-    },{
+    },
+    {
       id: 8,
       name: "address",
       type: "text",
@@ -110,21 +118,28 @@ const Register = () => {
     }
   ];
 
+  const checkUserData = async () => {
+    let { data } = await axios.get("https://server-csc.herokuapp.com/users");
+    setUsers(data);
+    console.log(data);
+  };
+
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const [zones, setZones] = useState([]);
+  const [type, TypeDropdown] = useDropdown("type", "", types, onChange);
   const [city, CityDropdown] = useDropdown("city", "Cairo", cities, onChange);
   const [zone, ZoneDropdown, setZone] = useDropdown("zone", "", zones, onChange);
 
   useEffect(() => {
-    // const cities = ['Cairo', 'Alexandria', 'Giza', 'Kafr al-Sheikh'];
+    checkUserData();
     const ZonesList = [
-      ['one', 'dfdfs'],
-      ['two', 'érfvr'],
-      ['three', 'ththt'],
-      ['four', 'thtjhy']
+      ['Old Cairo', 'El Matareya', 'Garden City', 'Heliopolis', 'Maadi', 'Zamalek'],
+      ['Al-Montazah', 'Al-Gomrok', 'El-Dekhila', 'Agam', 'borg El-Arab'],
+      ['Dokki', 'Agouza', 'Haram', 'Omrania', 'Monib'],
+      ['Desouk', 'Al‑Burulus', 'Biyala', 'Qallin', 'Al-Burulus']
     ];
     setZones([]);
     setZone("");
@@ -142,12 +157,18 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);
+    users.filter((user) => {
+      dispatch(handleHasLoged(user));
+      navigate("/profile");
+    });
   };
 
   return (<>
     <div className="register mx-auto rounded p-3 my-5">
       <form onSubmit={handleSubmit}>
         <h1 className="text-center mt-3 mb-5">Register</h1>
+        <TypeDropdown />
+
         {inputs.map((input) => (
           <FormInput
           key={input.id}
@@ -157,7 +178,8 @@ const Register = () => {
           />
         ))}
         <CityDropdown />
-        <ZoneDropdown />         
+        <ZoneDropdown />
+
         <Checkbox label="I Agree to the Privacy & Policy" required/>
         <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
         <p style={{ color: "#818181" }} className="my-2 text-center">
