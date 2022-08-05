@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { handleHasLoged } from "../../redux/action";
 import Toast from "react-bootstrap/Toast";
-import Header from "../../common/header/Header";
+import ToastContainer from 'react-bootstrap/ToastContainer';
 
 import axios from "axios";
 
@@ -46,9 +46,18 @@ export default function Login() {
 
   return (
     <>
-      {failedlogIn && (
-        <Toast>
-          <strong className="me-auto">Bootstrap</strong>
+      
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5"
+      >
+        <div className="position-relative">
+        {failedlogIn && (
+          <ToastContainer className="p-3" position="middle-center">
+        <Toast 
+        className="shadow-sm "
+        style={{backgroundColor:"#d90427ab"}}
+        >
 
           <button
             type="button"
@@ -57,13 +66,10 @@ export default function Login() {
             data-dismiss="toast"
             onClick={() => setFailedlogIn(false)}
           ></button>
-          <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+          <Toast.Body>your password or email is incorrect</Toast.Body>
         </Toast>
+        </ToastContainer>
       )}
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5"
-      >
       <h2 className="text-center my-2 dark-text">Login</h2>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email :</Form.Label>
@@ -116,6 +122,7 @@ export default function Login() {
         <p style={{ color: "#818181" }} className="my-2 text-center">
           Don't have an account? <Link to='/register'>Register</Link>
         </p>
+        </div>
       </Form>
     </>
   );
