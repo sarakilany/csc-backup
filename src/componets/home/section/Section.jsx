@@ -18,7 +18,7 @@ const state = useSelector((state) => state);
       </Row>
     {(() => {
       if (state.has_loged ==null ) {
-        return  <div className=" mb-2 white-bg">
+        return  <div className=" mb-2 ">
             <Container>
             <Row className="py-3 py-lg-5 flex-column-reverse flex-lg-row">
    <Col className="col-12 col-lg-6 py-3 py-lg-5 justify-content-center align-items-center flex-column d-flex">
@@ -43,8 +43,9 @@ const state = useSelector((state) => state);
           />
         </Col>
       </Row>
-
-      <Container className="pt-5">
+      </Container>
+        <div className=" white-bg">
+      <Container className="">
             <Row className="py-3 py-lg-5">
               <Col className="py-3 py-lg-5">
                 <img
@@ -67,12 +68,12 @@ const state = useSelector((state) => state);
                 </Button>
               </Col>
             </Row>
-            </Container>
 
     </Container>
+    </div>
       </div>;}
       else if (state.has_loged.type==="org") {
-        return <div className=" mb-2 white-bg">
+        return <div className=" mb-2">
              <Container>
              <Row className="py-3 py-lg-5 flex-column-reverse flex-lg-row">
                <Col className="col-12 col-lg-6 py-3 py-lg-5 justify-content-center align-items-center flex-column d-flex">
