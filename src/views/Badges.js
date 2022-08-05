@@ -74,7 +74,7 @@ function Badges() {
           <Form onSubmit={handleSubmit(onSubmit)} >
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>User ID</Form.Label>
-              <Form.Control name='userid' type="number" placeholder="Enter User ID that will be assigned badge" {...register("userid")} />
+              <Form.Control name='userid' type="text" placeholder="Enter User ID that will be assigned badge" {...register("userid")} />
               <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
               </Form.Text>
