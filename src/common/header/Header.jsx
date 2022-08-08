@@ -4,24 +4,33 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Button from "react-bootstrap/esm/Button";
-import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useDispatch } from "react-redux";
 import { handleHasLoged } from "../../redux/action";
+import userPhoto from '../../assets/images/profile/user-white.png';
+import orgPhoto from '../../assets/images/profile/company-white.png';
+import indvPhoto from '../../assets/images/profile/house-white.png';
+import logo from '../../assets/images/logo.png'
 
 export default function Header() {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const OnLogOut =()=>{
+    dispatch(handleHasLoged(null));
+    navigate("/")
+    window.scrollTo(0, 0);
+}
 
   return (
     <>
       {["lg"].map((expand) => (
-        <Navbar key={expand} expand={expand} className="green-bg sticky-top">
+        <Navbar key={expand} expand={expand} className="green-bg sticky-top py-0">
           <Container>
-            <Navbar.Brand className="white-text fw-semibold" as={Link} to="/">
-              LOGO
+            <Navbar.Brand className="white-text fw-semibold my-0" as={Link} to="/">
+              <img src={logo} alt="logo" className="logo-pic"/>
             </Navbar.Brand>
 
             <Navbar.Toggle
@@ -65,9 +74,6 @@ export default function Header() {
                     >
                       Contact Us
                     </Nav.Link>
-                    <Nav.Link className="white-text fw-semibold">
-                      Stats
-                    </Nav.Link>
                     <Nav.Link
                       as={Link}
                       to="/allNews"
@@ -98,42 +104,143 @@ export default function Header() {
                       </div>
                     ) : (
                       <div className="user-border mx-md-1 d-block my-2 my-md-0">
-                        <NavDropdown
-                          title=""
-                          className="user-info "
-                          id={`offcanvasNavbarDropdown-expand-${expand}`}
-                        >
-                          <NavDropdown.Item
-                            to="/profile"
-                            as={Link}
-                            className="white-text fw-semibold "
+                        {
+                        state.has_loged.type === "individual"
+                          ?(
+                            <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                                `url(${indvPhoto})`,
+                            }}
                           >
-                            UserName
-                            <small className="d-block fw-light">email</small>
-                          </NavDropdown.Item>
-                          <NavDropdown.Divider />
-                          <NavDropdown.Item
-                            href="#action5"
-                            className="white-text fw-semibold "
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                              to="/admin/editProfile"
+                              as={Link}                             
+                              className="white-text fw-semibold "
+                            >
+                               Edit Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin/request"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Make a Request
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              className="white-text fw-semibold "
+                              onClick={() => OnLogOut()}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                           ):(
+                            
+                              state.has_loged.type === "org"?
+                              (
+                                <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                              `url(${orgPhoto})`,
+                            }}
                           >
-                            settings
-                          </NavDropdown.Item>
-                          <NavDropdown.Item
-                            to="/admin"
-                            as={Link}
-                            className="white-text fw-semibold "
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                               to="/admin/editProfile"
+                               as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Edit Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin/request"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Submit Request
+                            </NavDropdown.Item>
+                            <NavDropdown.Item                              
+                              className="white-text fw-semibold "
+                              onClick={() => OnLogOut()}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                              ):(
+                                <NavDropdown
+                            title=""
+                            className="user-info position-relative "
+                            id={`offcanvasNavbarDropdown-expand-${expand}`}
+                            style={{
+                              backgroundImage:
+                              `url(${userPhoto})`,
+                            }}
                           >
-                            Dashboard
-                          </NavDropdown.Item>
-                          <NavDropdown.Item
-                            to="/"
-                            as={Link}
-                            className="white-text fw-semibold "
-                            onClick={() => dispatch(handleHasLoged(null))}
-                          >
-                            LogOut
-                          </NavDropdown.Item>
-                        </NavDropdown>
+                            <NavDropdown.Item
+                              to="/admin/user"
+                              as={Link}
+                              className="white-text fw-semibold text-capitalize "
+                            >
+                              {state.has_loged.name}
+                              <small className="d-block fw-light">
+                                {state.has_loged.email}
+                              </small>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item
+                               to="/admin/editProfile"
+                               as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              Edit Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Item
+                              to="/admin/allRequests"
+                              as={Link}
+                              className="white-text fw-semibold "
+                            >
+                              All Requests
+                            </NavDropdown.Item>
+                            <NavDropdown.Item                      
+                              className="white-text fw-semibold "
+                              onClick={() => OnLogOut()}
+                            >
+                              LogOut
+                            </NavDropdown.Item>
+                          </NavDropdown>
+                              )
+                            
+                            
+                            )
+                        } 
+                        
                       </div>
                     )}
                   </div>

@@ -1,0 +1,29 @@
+.my-footer h4{
+    color: #DDB771;
+    font-weight: 500;
+}
+.my-footer .footer-text{
+    font-size: 14px;
+    transition: all 0.1s ease-in;
+}
+.my-footer .footer-text:hover{
+    color: #F3F9E3 !important;
+}
+.my-footer .footer-i{
+    width: 30px;
+    height: 30px;
+    background-color: #6BBF59;
+    transition: all 0.2s ease-in;
+
+    
+}
+.my-footer .footer-i:hover{
+    color: #6BBF59 !important;
+    background-color: #F3F9E3 !important;
+    
+}
+.my-footer i{
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+}

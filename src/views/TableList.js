@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import axios from "axios";
 
-
-// react-bootstrap components
 import {
   Badge,
   Button,
@@ -19,150 +18,21 @@ import { Link } from "react-router-dom";
 
 
 function TableList() {
+  const [users, setUsers] = useState([]);
 
-
-  const adminObj = [
-    {
-      id: 1,
-      name: "ali",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "alex",
-    },
-    {
-      id: 2,
-      name: "ahmed",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "cairo",
-    },
-    {
-      id: 3,
-      name: "sama",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "siwa",
-    },
-    {
-      id: 4,
-      name: "aya",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "qena",
-    },
-    {
-      id: 5,
-      name: "mona",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "alex",
-    },
-  ];
-
-  const individualObj = [
-    {
-      id: 1,
-      name: "ali",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      address: "alex",
-      reqStatus: "pending",
-    },
-    {
-      id: 2,
-      name: "ahmed",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "cairo",
-      reqStatus: "done",
-    },
-    {
-      id: 3,
-      name: "sama",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "siwa",
-      reqStatus: "pending",
-    },
-    {
-      id: 4,
-      name: "aya",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "qena",
-      reqStatus: "pending",
-    },
-    {
-      id: 5,
-      name: "mona",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      city: "alex",
-      reqStatus: "done",
-    },
-  ];
-
-  const organizationObj = [
-    {
-      id: 1,
-      name: "ali",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      address: "alex",
-      reqStatus: "pending",
-      class: "a",
-      contactPerson: "kamel",
-    },
-    {
-      id: 2,
-      name: "ahmed",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      address: "alex",
-      reqStatus: "done",
-      class: "a",
-      contactPerson: "kamel",
-    },
-    {
-      id: 3,
-      name: "sama",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      address: "alex",
-      reqStatus: "pending",
-      class: "a",
-      contactPerson: "kamel",
-    },
-    {
-      id: 4,
-      name: "aya",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      address: "alex",
-      reqStatus: "pending",
-      class: "a",
-      contactPerson: "kamel",
-    },
-    {
-      id: 5,
-      name: "mona",
-      tel: "01223344556",
-      email: "mmmmm@mmm.com",
-      address: "alex",
-      reqStatus: "done",
-      class: "a",
-      contactPerson: "kamel",
-    },
-  ];
-
- 
-
+  const getusersData = async () => {
+    let { data } = await axios.get("https://server-csc.herokuapp.com/users");
+    setUsers(data);
+  };
+  useEffect(() => {
+    getusersData();
+  }, []);
 
   return (
     <>
       <Container fluid>
         <Row>
-          <Col className="border  mt-5 p-3 py-4 mb-3" md="12">
+          <Col className="border mt-5 p-3 py-4 mb-3" md="12" style={{backgroundColor:"#96c095"}}>
             <Card className="strpied-tabled-with-hover">
               <Card.Header>
                 <Card.Title as="h4">Admins</Card.Title>
@@ -180,8 +50,9 @@ function TableList() {
                     </tr>
                   </thead>
                   <tbody>
-                    {adminObj.map((admin, index) => {
-                      return (
+                    {users.map((admin, index) => {
+                       if(admin.type=="admin")
+                     { return (
                         <>
                           <tr>
                             <td> {admin.id}</td>
@@ -191,7 +62,7 @@ function TableList() {
                             <td>{admin.city}</td>
                           </tr>
                         </>
-                      );
+                      );}
                     })}
                   </tbody>
                 </Table>
@@ -207,8 +78,8 @@ function TableList() {
             </Link>
           </Col>
 
-          <Col className="border  mt-5 p-3 py-5 mb-3" md="12">
-            <Card className="card-plain table-plain-bg">
+          <Col className="border  mt-5 p-3 py-5 mb-3" md="12" style={{backgroundColor:"#96c095"}}>
+            <Card className=" table-plain-bg">
               <Card.Header>
                 <Card.Title as="h4">Individual</Card.Title>
                 <p className="card-category">check your individuals</p>
@@ -226,8 +97,9 @@ function TableList() {
                     </tr>
                   </thead>
                   <tbody>
-                    {individualObj.map((individual, index) => {
-                      return (
+                    {users.map((individual, index) => {
+                      if(individual.type=="individual")
+                     { return (
                         <>
                           <tr>
                             <td> {individual.id}</td>
@@ -238,7 +110,7 @@ function TableList() {
                             <td>{individual.reqStatus}</td>
                           </tr>
                         </>
-                      );
+                      );}
                     })}
                   </tbody>
                 </Table>
@@ -254,8 +126,8 @@ function TableList() {
             </Link>
           </Col>
 
-          <Col className="border  mt-5 p-3 py-5" md="12">
-            <Card className="card-plain table-plain-bg">
+          <Col className="border  mt-5 p-3 py-5" md="12" style={{backgroundColor:"#96c095"}}>
+            <Card className=" table-plain-bg">
               <Card.Header>
                 <Card.Title as="h4">Orgnization</Card.Title>
                 <p className="card-category">check your Orgnizations</p>
@@ -275,8 +147,9 @@ function TableList() {
                     </tr>
                   </thead>
                   <tbody>
-                    {organizationObj.map((organization, index) => {
-                      return (
+                    {users.map((organization, index) => {
+                      if(organization.type=="org")
+                     { return (
                         <>
                           <tr>
                             <td> {organization.id}</td>
@@ -289,7 +162,7 @@ function TableList() {
                             <td>{organization.contactPerson}</td>
                           </tr>
                         </>
-                      );
+                      );}
                     })}
                   </tbody>
                 </Table>

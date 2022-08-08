@@ -8,7 +8,6 @@ export default function SingleNews() {
 
   return (
     <>
-    <Header />
       <div className="container row my-4 mx-auto px-md-5">
         <div className=" col-10 col-md-8 mx-auto">
           <div className="">

@@ -1,30 +1,44 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormInput from "../FormInputs/formInput";
-import FormSelect from "../FormInputs/formSelect";
-import Checkbox from "../FormInputs/Checkbox";
+import useDropdown from '../FormInputs/useDropdown';
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { handleHasLoged } from "../../redux/action";
+import axios from "axios";
 import "./Register.css";
-import Header from "../../common/header/Header";
-import { Link } from "react-router-dom";
 
 const Register = () => {
+  const cities = ['Cairo', 'Alexandria', 'Giza', 'Kafr al-Sheikh'];
+  const types = ['individual', 'org'];
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
   const [values, setValues] = useState({
-    username: "",
+    id: "",
+    name: "",
     email: "",
     birthday: "",
     password: "",
-    confirmPassword: "",
     phone: "",
     landline: "",
+    class: null,
+    badge: null,
+    rank: null,
+    points: null,
+    contactPersonalName: null,
     addressConfirmImage: "",
+    statusVerification: null,
+    requests: null,
     address: "",
     city: "",
     zone: "",
+    type: ""
   });
 
   const inputs = [
     {
       id: 1,
-      name: "username",
+      name: "name",
       type: "text",
       placeholder: "Username",
       errorMessage:
@@ -75,12 +89,11 @@ const Register = () => {
     },
     {
       id: 6,
-      name: "phone",
+      name: "tel",
       type: "tel",
       placeholder: "Phone",
       errorMessage: "phone number should be 11 number",
       label: "Phone",
-      // pattern: "",
       required: true,
     },
     {
@@ -88,28 +101,11 @@ const Register = () => {
       name: "landline",
       type: "tel",
       placeholder: "Landline",
-      errorMessage: "Password doesn't match!",
+      errorMessage: "",
       label: "Landline",
-      // pattern: "",
     },
     {
       id: 8,
-      name: "city",
-      type: "select",
-      placeholder: "Select your city",
-      label: "City",
-      required: true,
-    },
-    {
-      id: 9,
-      name: "zone",
-      type: "select",
-      placeholder: "Select your zone",
-      label: "Zone",
-      required: true,
-    },
-    {
-      id: 10,
       name: "address",
       type: "text",
       placeholder: "Address",
@@ -117,39 +113,108 @@ const Register = () => {
       label: "Address",
       required: true,
     },
+    {
+      id: 9,
+      name: "addressConfirmImage",
+      type: "file",
+      placeholder: "",
+      label: "Upload electric connected or tax record",
+      required: true, 
+    }
   ];
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(values);
-  };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
+  const [zones, setZones] = useState([]);
+  const [type, TypeDropdown] = useDropdown("type", "", types, onChange);
+  const [city, CityDropdown] = useDropdown("city", "Cairo", cities, onChange);
+  const [zone, ZoneDropdown, setZone] = useDropdown("zone", "", zones, onChange);
+
+  useEffect(() => {
+    const ZonesList = [
+      ['Old Cairo', 'El Matareya', 'Garden City', 'Heliopolis', 'Maadi', 'Zamalek'],
+      ['Al-Montazah', 'Al-Gomrok', 'El-Dekhila', 'Agam', 'borg El-Arab'],
+      ['Dokki', 'Agouza', 'Haram', 'Omrania', 'Monib'],
+      ['Desouk', 'Al‑Burulus', 'Biyala', 'Qallin', 'Al-Burulus']
+    ];
+    setZones([]);
+    setZone("");
+
+    let id = cities.indexOf(city);
+
+    const selectZone = (id => {
+      const zoneString = ZonesList.filter((zone,i) => i === id );
+      setZones(...zoneString);
+    })
+
+    selectZone(id);    
+  }, [city, setZone]);
+
+  const generateToken = () => {
+    let d = new Date().getTime();
+
+    if(window.performance && typeof window.performance.now === "function") {
+      d += performance.now();
+    }
+
+    let token = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
+    {
+      let r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return token;
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(values);
+    const submittedData = {
+      "id": generateToken(),
+      "type": values.type,
+      "name": values.name,
+      "email": values.email,
+      "password": values.password,
+      "city": values.city,
+      "zone": values.zone,
+      "address": values.address,
+      "tel": values.tel,
+      "landline": values.landline,
+      "class": null,
+      "badge": null,
+      "rank": null,
+      "points": null,
+      "contactPersonalName": null,
+      "addressConfirmImage": values.addressConfirmImage,
+      "statusVerification": null,
+      "requests": null,
+    }
+    dispatch(handleHasLoged(submittedData));
+    axios.post(`https://server-csc.herokuapp.com/users/`, submittedData).then(
+      response => console.log(submittedData)
+    );
+    navigate("/admin/user");
+  };
+
   return (<>
-    <Header />
-    <div className="register rounded mx-auto py-md-4 px-md-5 p-2 my-5">
-      <form onSubmit={handleSubmit} className="w-100">
-        <h2 className=" dark-text mt-0 w-100 text-center">Register</h2>
+    <div className="register mx-auto rounded p-3 my-5">
+      <form onSubmit={handleSubmit}>
+        <h1 className="text-center mt-3 mb-5">REGISTER</h1>
+        <TypeDropdown />
+
         {inputs.map((input) => (
-          (input.type === 'select' ? 
-          <FormSelect 
+          <FormInput
           key={input.id}
           {...input}
           value={values[input.name]}
-          onChange={onChange} />
-          :
-          <FormInput 
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-           />
-          )
+          onChange={onChange}
+          />
         ))}
-        <Checkbox label="I Agree to the Privacy & Policy" required/>
+        <CityDropdown />
+        <ZoneDropdown />         
+        <label className="flex-row-reverse justify-content-end"><div>I Agree to the <Link to="/privacy">Privacy & Policy</Link></div><input className="checkbox-input" type="checkbox" required/></label>
         <button className=" home-btn px-4 py-2 my-4 d-block mx-auto" type="submit">Submit</button>
         <p style={{ color: "#818181" }} className="my-2 text-center">
           You have an account? <Link to='/login'>LogIn</Link>

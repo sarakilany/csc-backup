@@ -1,11 +1,12 @@
 import AddUser from "./views/AddUser.js";
-import UserProfile from "./views/UserProfile.js";
-import TableList from "./views/TableList.js";
 import Badges from "./views/Badges.js";
-import AllRequests from "./views/AllRequests.js";
+import AllRequests from "./views/AllRequests";
 import SubmitRequest from "./views/SubmitRequest.js";
 import EditProfile from "./views/EditProfile.js";
-import LeaderBord from "./views/LeaderBord.js";
+import LeaderBord from "./componets/leaderBoard/LeaderBoard";
+import UserProfile from "./views/UserProfile.js";
+import TableList from './views/TableList'
+import Billing from "./views/billing.js";
 
 export const superAdminRoutes = [
   {
@@ -59,7 +60,7 @@ export const superAdminRoutes = [
   },
 ];
 
-export const adminRoutes  = [
+export const adminRoutes = [
   {
     path: "/user",
     name: "Profile",
@@ -81,10 +82,10 @@ export const adminRoutes  = [
     component: AllRequests,
     layout: "/admin",
   },
-  
+
 ];
 
-export const userRoutes  = [
+export const userRoutes = [
   {
     path: "/user",
     name: " Profile",
@@ -101,11 +102,26 @@ export const userRoutes  = [
   },
   {
     path: "/request",
-    name: "Maps",
+    name: "Requests",
     icon: "nc-icon nc-pin-3",
     component: SubmitRequest,
     layout: "/admin",
   },
+  {
+    path: "/allRequests",
+    name: "All Requests",
+    icon: "nc-icon nc-atom",
+    component: AllRequests,
+    layout: "/admin",
+  },
+  {
+    path: "/billing",
+    name: "Billing",
+    icon: "nc-icon nc-circle-09",
+    component: Billing,
+    layout: "/admin",
+  },
+  
 ];
 
 
